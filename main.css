@@ -1,3 +1,10 @@
 body {
-  margin: 0;
+  margin: 2em;
+  font-size: 150%;
+  line-height: 2;
+  font-family: monospace;
+}
+
+.responses {
+  font-size: .5rem;
 }
