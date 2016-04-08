@@ -1,23 +1,12 @@
 { div, span } = require './elements'
-partial = require 'lodash/partial'
-colors = require './colors'
 
-controls = require './controls'
-rockpaperscissors = require './rock_paper_scissors'
+game = require './game'
+splash = require './splash'
 
 app = (props, dispatch) ->
-  className = if props.playing then 'playing' else ''
-  foregroundColor = colors.dynamic(props.pair)
-
   if not props.me
-    div { className: 'me connecting'}, 'Connecting...'
+    splash props, dispatch
   else
-    div { className: 'app-root', style: { backgroundColor: colors.background } },
-      div { className: 'me ' + className }, 'Connected ', props.me
-
-      controls(props, dispatch)
-
-      div { className: 'display' },
-        rockpaperscissors(props.yours, props.theirs, foregroundColor)
+    game props, dispatch
 
 module.exports = app
