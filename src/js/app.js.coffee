@@ -3,7 +3,12 @@ layout = require './components/layout'
 connect = require './actions'
 store = require './store'
 
+cleanTimeout = 4000;
+
 websocket = (dispatch) ->
+  clean = () ->
+    dispatch 'clean', null
+
   c = new WebSocket 'ws://54.208.58.61:8100/ready'
   c.onopen = () ->
     dispatch 'connected', c
@@ -13,6 +18,7 @@ websocket = (dispatch) ->
     if data.welcome
       dispatch 'welcomed', data.welcome
     else if data.game
+      setTimeout clean, cleanTimeout
       dispatch 'check', data
 
   c.onclose = (event) ->

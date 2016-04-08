@@ -75,3 +75,9 @@ body {
 #rock-paper-scissors {
   height: 100%;
 }
+
+svg,
+path,
+rect {
+  transition: .5s all;
+}

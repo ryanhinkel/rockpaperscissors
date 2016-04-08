@@ -17,7 +17,7 @@ playButton = (fn, key, label, played, color) ->
 
 
 controls = (props, dispatch) ->
-  { yours, pair, shooting } = props
+  { yours, pair, shooting, playing } = props
   color = colors.dynamic(pair)
 
   clear = () ->
@@ -25,7 +25,7 @@ controls = (props, dispatch) ->
 
   shoot = (play) ->
     () ->
-      if not shooting
+      if not playing and not shooting
         setTimeout clear, controlTimeout
         dispatch 'shoot', play
 
