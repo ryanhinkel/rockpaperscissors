@@ -17,6 +17,9 @@ body {
   background-color: #111;
 }
 
+.me.connecting {
+  color: #ce7e37;
+}
 
 .me.playing {
   color: #ceba37;
