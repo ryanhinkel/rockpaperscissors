@@ -16,7 +16,7 @@ app = (props, dispatch) ->
     div {}, 'Connecting...'
   else
     div { className: 'app-root' },
-      div { className: className }, 'Connected ', props.me,
+      div { className: 'me ' + className }, 'Connected ', props.me,
 
       div { className: 'player-buttons' }
         playButton(shoot, 'rock', "Rock", props.yours)

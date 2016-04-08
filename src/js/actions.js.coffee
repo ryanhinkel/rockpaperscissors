@@ -13,6 +13,9 @@ actions =
     connection.send 'hello'
     associate state, 'connection', connection
 
+  disconnected: (state, payload) ->
+    associate state, 'me', null
+
   welcomed: (state, id) ->
     associate state, 'me', id
 

@@ -17,7 +17,8 @@ websocket = (dispatch) ->
       # store.data.responses.push(data)
 
   c.onclose = (event) ->
-    console.log('closed!');
+    dispatch 'disconnected', null
+    websocket(dispatch)
 
 update = (newState, dispatch) ->
   store.state = newState
