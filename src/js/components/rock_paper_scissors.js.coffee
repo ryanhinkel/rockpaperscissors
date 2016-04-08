@@ -1,327 +1,362 @@
 { svg, g, rect, path } = require './svg_elements'
 
-module.exports = (props) ->
+trace = (yours, theirs) ->
+  t = {}
+
+  t.r2 = theirs is 'rock'
+  t.p2 = theirs is 'paper'
+  t.s1 = yours is 'scissors'
+  t.r1 = yours is 'rock'
+  t.p1 = yours is 'paper'
+  t.s2 = theirs is 'scissors'
+
+  t.and0 = yours is 'rock'    and  theirs is 'scissors'
+  t.and1 = yours is 'paper'   and  theirs is 'rock'
+  t.and2 = yours is 'scissors' and  theirs is 'paper'
+  t.and3 = yours is 'scissors' and  theirs is 'rock'
+  t.and4 = yours is 'rock'    and  theirs is 'paper'
+  t.and5 = yours is 'paper'   and  theirs is 'scissors'
+
+  t.or1 = t.and1 or t.and2
+  t.or0 = t.and0 or t.or1
+
+  t.or2 = t.and3 or t.and4
+  t.or3 = t.and5 or t.or2
+
+  t
+
+module.exports = (yours, theirs) ->
+
+  highlight = '#ffffff'
+  foreground = '#e8c425'
+  background = '#111111'
+
+  t = trace(yours, theirs)
+
+  getColor = (lookup) ->
+    if lookup then highlight else foreground
+
   svg(
     { version: "1.1", id: "Layer_1", xmlns: "http://www.w3.org/2000/svg", x: "0px", y: "0px", width: "310px", height: "430.001px", viewBox: "0.5 0.5 310 430.001" },
     g(
       { id: "Layer_5" },
-      rect({ x: "0.5", y: "0.5", fill: props.background, width: "310", height: "430" })
+      rect({ x: "0.5", y: "0.5", fill: background, width: "310", height: "430" })
     ),
     g(
       { id: "input_paths" },
-      path({ id: "p_x5F_r1_2_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M64.501,236.5v34c0,3.309,2.691,6,6,6h98 c6.065,0,11,4.935,11,11v39h-8v-39c0-1.654-1.346-3-3-3h-98c-7.72,0-14-6.28-14-14v-34H64.501z" }),
+      path({ id: "p_r1_2_", fill: getColor(t.r1), stroke: background, "stroke-miterlimit": "10", d: "M64.501,236.5v34c0,3.309,2.691,6,6,6h98 c6.065,0,11,4.935,11,11v39h-8v-39c0-1.654-1.346-3-3-3h-98c-7.72,0-14-6.28-14-14v-34H64.501z" }),
       g(
         { id: "grad_13_" },
-        rect({ x: "140.501", y: "276.5", width: "2", height: "8" , fill: props.background }),
-        rect({ x: "138.501", y: "276.5", width: "1.6", height: "8" , fill: props.background }),
-        rect({ x: "136.501", y: "276.5", width: "1.2", height: "8" , fill: props.background }),
-        rect({ x: "134.501", y: "276.5", width: "0.8", height: "8" , fill: props.background }),
-        rect({ x: "132.501", y: "276.5", width: "0.4", height: "8" , fill: props.background }),
-        rect({ x: "158.501", y: "276.5", width: "2", height: "8" , fill: props.background }),
-        rect({ x: "149.501", y: "276.5", width: "2", height: "8" , fill: props.background }),
-        rect({ x: "160.901", y: "276.5", width: "1.6", height: "8" , fill: props.background }),
-        rect({ x: "163.301", y: "276.5", width: "1.2", height: "8" , fill: props.background }),
-        rect({ x: "165.701", y: "276.5", width: "0.8", height: "8" , fill: props.background }),
-        rect({ x: "168.101", y: "276.5", width: "0.4", height: "8", fill: props.background })
+        rect({ x: "140.501", y: "276.5", width: "2", height: "8" , fill: background }),
+        rect({ x: "138.501", y: "276.5", width: "1.6", height: "8" , fill: background }),
+        rect({ x: "136.501", y: "276.5", width: "1.2", height: "8" , fill: background }),
+        rect({ x: "134.501", y: "276.5", width: "0.8", height: "8" , fill: background }),
+        rect({ x: "132.501", y: "276.5", width: "0.4", height: "8" , fill: background }),
+        rect({ x: "158.501", y: "276.5", width: "2", height: "8" , fill: background }),
+        rect({ x: "149.501", y: "276.5", width: "2", height: "8" , fill: background }),
+        rect({ x: "160.901", y: "276.5", width: "1.6", height: "8" , fill: background }),
+        rect({ x: "163.301", y: "276.5", width: "1.2", height: "8" , fill: background }),
+        rect({ x: "165.701", y: "276.5", width: "0.8", height: "8" , fill: background }),
+        rect({ x: "168.101", y: "276.5", width: "0.4", height: "8", fill: background })
       ),
-      path({ id: "p_x5F_r2_2_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M176.501,236.5v4c0,3.309-2.691,6-6,6h-8 c-6.065,0-11,4.935-11,11v69h8v-69c0-1.654,1.346-3,3-3h8c7.72,0,14-6.28,14-14v-4H176.501z" }),
-      path({ id: "p_x5F_r2_1_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M184.501,194.5v-34c0-7.72-6.28-14-14-14h-38 c-1.654,0-3-1.346-3-3v-44h-8v44c0,6.065,4.935,11,11,11h38c3.309,0,6,2.691,6,6v34H184.501z" }),
+      path({ id: "p_r2_2_", fill: getColor(t.r2), stroke: background, "stroke-miterlimit": "10", d: "M176.501,236.5v4c0,3.309-2.691,6-6,6h-8 c-6.065,0-11,4.935-11,11v69h8v-69c0-1.654,1.346-3,3-3h8c7.72,0,14-6.28,14-14v-4H176.501z" }),
+      path({ id: "p_r2_1_", fill: getColor(t.r2), stroke: background, "stroke-miterlimit": "10", d: "M184.501,194.5v-34c0-7.72-6.28-14-14-14h-38 c-1.654,0-3-1.346-3-3v-44h-8v44c0,6.065,4.935,11,11,11h38c3.309,0,6,2.691,6,6v34H184.501z" }),
       g(
         { id: "grad_8_" },
-        rect({ x: "140.501", y: "146.5", width: "2", height: "8" , fill: props.background }),
-        rect({ x: "138.501", y: "146.5", width: "1.6", height: "8" , fill: props.background }),
-        rect({ x: "136.501", y: "146.5", width: "1.2", height: "8" , fill: props.background }),
-        rect({ x: "134.501", y: "146.5", width: "0.8", height: "8" , fill: props.background }),
-        rect({ x: "132.501", y: "146.5", width: "0.4", height: "8" , fill: props.background }),
-        rect({ x: "158.501", y: "146.5", width: "2", height: "8" , fill: props.background }),
-        rect({ x: "149.501", y: "146.5", width: "2", height: "8" , fill: props.background }),
-        rect({ x: "160.901", y: "146.5", width: "1.6", height: "8" , fill: props.background }),
-        rect({ x: "163.301", y: "146.5", width: "1.2", height: "8" , fill: props.background }),
-        rect({ x: "165.701", y: "146.5", width: "0.8", height: "8" , fill: props.background }),
-        rect({ x: "168.101", y: "146.5", width: "0.4", height: "8", fill: props.background })
+        rect({ x: "140.501", y: "146.5", width: "2", height: "8" , fill: background }),
+        rect({ x: "138.501", y: "146.5", width: "1.6", height: "8" , fill: background }),
+        rect({ x: "136.501", y: "146.5", width: "1.2", height: "8" , fill: background }),
+        rect({ x: "134.501", y: "146.5", width: "0.8", height: "8" , fill: background }),
+        rect({ x: "132.501", y: "146.5", width: "0.4", height: "8" , fill: background }),
+        rect({ x: "158.501", y: "146.5", width: "2", height: "8" , fill: background }),
+        rect({ x: "149.501", y: "146.5", width: "2", height: "8" , fill: background }),
+        rect({ x: "160.901", y: "146.5", width: "1.6", height: "8" , fill: background }),
+        rect({ x: "163.301", y: "146.5", width: "1.2", height: "8" , fill: background }),
+        rect({ x: "165.701", y: "146.5", width: "0.8", height: "8" , fill: background }),
+        rect({ x: "168.101", y: "146.5", width: "0.4", height: "8", fill: background })
       ),
-      path({ id: "p_x5F_s1_2_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M124.501,236.5v4c0,3.309,2.691,6,6,6h8 c6.065,0,11,4.935,11,11v69h-8v-69c0-1.654-1.346-3-3-3h-8c-7.72,0-14-6.28-14-14v-4H124.501z" }),
-      path({ id: "p_x5F_s1_1_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M116.501,194.5v-4c0-7.72,6.28-14,14-14h8 c1.654,0,3-1.346,3-3v-74h8v74c0,6.065-4.935,11-11,11h-8c-3.309,0-6,2.691-6,6v4H116.501z" }),
-      path({ id: "p_x5F_r1_1_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M56.501,194.5v-64c0-7.72,6.28-14,14-14h8 c1.654,0,3-1.346,3-3v-14h8v14c0,6.065-4.935,11-11,11h-8c-3.309,0-6,2.691-6,6v64H56.501z" }),
-      path({ id: "p_x5F_p2_3_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M206.5,236.5v34c0,3.309-2.691,6-6,6h-7.999 c-6.065,0-11,4.935-11,11v39h8v-39c0-1.654,1.346-3,3-3h7.999c7.72,0,14-6.28,14-14v-34H206.5z" }),
-      path({ id: "p_x5F_p2_1_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M214.5,194.5v-4c0-7.72-6.28-14-14-14h-37.999 c-1.654,0-3-1.346-3-3v-74h-8v74c0,6.065,4.935,11,11,11H200.5c3.309,0,6,2.691,6,6v4H214.5z" }),
-      path({ id: "p_x5F_p1_2_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M94.501,236.5v64c0,3.309,2.691,6,6,6h98 c6.065,0,11,4.936,11,11v9h-8v-9c0-1.654-1.346-3-3-3h-98c-7.72,0-14-6.279-14-14v-64H94.501z" }),
-      path({ id: "p_x5F_p1_1_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M86.501,194.5v-34c0-7.72,6.28-14,14-14h9 c1.654,0,2-1.346,2-3v-44h8v44c0,6.065-3.935,11-10,11h-9c-3.309,0-6,2.691-6,6v34H86.501z" }),
+      path({ id: "p_s1_2_", fill: getColor(t.s1), stroke: background, "stroke-miterlimit": "10", d: "M124.501,236.5v4c0,3.309,2.691,6,6,6h8 c6.065,0,11,4.935,11,11v69h-8v-69c0-1.654-1.346-3-3-3h-8c-7.72,0-14-6.28-14-14v-4H124.501z" }),
+      path({ id: "p_s1_1_", fill: getColor(t.s1), stroke: background, "stroke-miterlimit": "10", d: "M116.501,194.5v-4c0-7.72,6.28-14,14-14h8 c1.654,0,3-1.346,3-3v-74h8v74c0,6.065-4.935,11-11,11h-8c-3.309,0-6,2.691-6,6v4H116.501z" }),
+      path({ id: "p_r1_1_", fill: getColor(t.r1), stroke: background, "stroke-miterlimit": "10", d: "M56.501,194.5v-64c0-7.72,6.28-14,14-14h8 c1.654,0,3-1.346,3-3v-14h8v14c0,6.065-4.935,11-11,11h-8c-3.309,0-6,2.691-6,6v64H56.501z" }),
+      path({ id: "p_p2_3_", fill: getColor(t.p2), stroke: background, "stroke-miterlimit": "10", d: "M206.5,236.5v34c0,3.309-2.691,6-6,6h-7.999 c-6.065,0-11,4.935-11,11v39h8v-39c0-1.654,1.346-3,3-3h7.999c7.72,0,14-6.28,14-14v-34H206.5z" }),
+      path({ id: "p_p2_1_", fill: getColor(t.p2), stroke: background, "stroke-miterlimit": "10", d: "M214.5,194.5v-4c0-7.72-6.28-14-14-14h-37.999 c-1.654,0-3-1.346-3-3v-74h-8v74c0,6.065,4.935,11,11,11H200.5c3.309,0,6,2.691,6,6v4H214.5z" }),
+      path({ id: "p_p1_2_", fill: getColor(t.p1), stroke: background, "stroke-miterlimit": "10", d: "M94.501,236.5v64c0,3.309,2.691,6,6,6h98 c6.065,0,11,4.936,11,11v9h-8v-9c0-1.654-1.346-3-3-3h-98c-7.72,0-14-6.279-14-14v-64H94.501z" }),
+      path({ id: "p_p1_1_", fill: getColor(t.p1), stroke: background, "stroke-miterlimit": "10", d: "M86.501,194.5v-34c0-7.72,6.28-14,14-14h9 c1.654,0,2-1.346,2-3v-44h8v44c0,6.065-3.935,11-10,11h-9c-3.309,0-6,2.691-6,6v34H86.501z" }),
       g(
         { id: "grad_3_" },
-        rect({ x: "171.501", y: "314.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "171.501", y: "316.9", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "171.501", y: "319.3", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "171.501", y: "321.7", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "171.501", y: "324.1", width: "8", height: "0.4" , fill: props.background }),
-        rect({ x: "171.501", y: "304.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "171.501", y: "302.5", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "171.501", y: "300.5", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "171.501", y: "298.5", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "171.501", y: "296.5", width: "8", height: "0.4", fill: props.background })
+        rect({ x: "171.501", y: "314.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "171.501", y: "316.9", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "171.501", y: "319.3", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "171.501", y: "321.7", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "171.501", y: "324.1", width: "8", height: "0.4" , fill: background }),
+        rect({ x: "171.501", y: "304.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "171.501", y: "302.5", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "171.501", y: "300.5", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "171.501", y: "298.5", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "171.501", y: "296.5", width: "8", height: "0.4", fill: background })
       ),
       g(
         { id: "grad_2_" },
-        rect({ x: "181.501", y: "314.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "181.501", y: "316.9", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "181.501", y: "319.3", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "181.501", y: "321.7", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "181.501", y: "324.1", width: "8", height: "0.4" , fill: props.background }),
-        rect({ x: "181.501", y: "304.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "181.501", y: "302.5", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "181.501", y: "300.5", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "181.501", y: "298.5", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "181.501", y: "296.5", width: "8", height: "0.4", fill: props.background })
+        rect({ x: "181.501", y: "314.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "181.501", y: "316.9", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "181.501", y: "319.3", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "181.501", y: "321.7", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "181.501", y: "324.1", width: "8", height: "0.4" , fill: background }),
+        rect({ x: "181.501", y: "304.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "181.501", y: "302.5", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "181.501", y: "300.5", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "181.501", y: "298.5", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "181.501", y: "296.5", width: "8", height: "0.4", fill: background })
       ),
       g(
         { id: "grad_5_" },
-        rect({ x: "141.5", y: "314.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "141.5", y: "316.9", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "141.5", y: "319.3", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "141.5", y: "321.7", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "141.5", y: "324.1", width: "8", height: "0.4" , fill: props.background }),
-        rect({ x: "141.5", y: "304.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "141.5", y: "302.5", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "141.5", y: "300.5", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "141.5", y: "298.5", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "141.5", y: "296.5", width: "8", height: "0.4", fill: props.background })
+        rect({ x: "141.5", y: "314.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "141.5", y: "316.9", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "141.5", y: "319.3", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "141.5", y: "321.7", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "141.5", y: "324.1", width: "8", height: "0.4" , fill: background }),
+        rect({ x: "141.5", y: "304.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "141.5", y: "302.5", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "141.5", y: "300.5", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "141.5", y: "298.5", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "141.5", y: "296.5", width: "8", height: "0.4", fill: background })
       ),
       g(
         { id: "grad_4_" },
-        rect({ x: "151.5", y: "314.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "151.5", y: "316.9", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "151.5", y: "319.3", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "151.5", y: "321.7", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "151.5", y: "324.1", width: "8", height: "0.4" , fill: props.background }),
-        rect({ x: "151.5", y: "304.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "151.5", y: "302.5", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "151.5", y: "300.5", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "151.5", y: "298.5", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "151.5", y: "296.5", width: "8", height: "0.4", fill: props.background })
+        rect({ x: "151.5", y: "314.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "151.5", y: "316.9", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "151.5", y: "319.3", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "151.5", y: "321.7", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "151.5", y: "324.1", width: "8", height: "0.4" , fill: background }),
+        rect({ x: "151.5", y: "304.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "151.5", y: "302.5", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "151.5", y: "300.5", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "151.5", y: "298.5", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "151.5", y: "296.5", width: "8", height: "0.4", fill: background })
       ),
       g(
         { id: "grad_7_" },
-        rect({ x: "111.501", y: "124.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "111.501", y: "126.9", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "111.501", y: "129.3", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "111.501", y: "131.7", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "111.501", y: "134.1", width: "8", height: "0.4" , fill: props.background }),
-        rect({ x: "111.501", y: "114.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "111.501", y: "112.5", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "111.501", y: "110.5", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "111.501", y: "108.5", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "111.501", y: "106.5", width: "8", height: "0.4", fill: props.background })
+        rect({ x: "111.501", y: "124.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "111.501", y: "126.9", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "111.501", y: "129.3", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "111.501", y: "131.7", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "111.501", y: "134.1", width: "8", height: "0.4" , fill: background }),
+        rect({ x: "111.501", y: "114.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "111.501", y: "112.5", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "111.501", y: "110.5", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "111.501", y: "108.5", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "111.501", y: "106.5", width: "8", height: "0.4", fill: background })
       ),
       g(
         { id: "grad_6_" },
-        rect({ x: "121.501", y: "124.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "121.501", y: "126.9", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "121.501", y: "129.3", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "121.501", y: "131.7", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "121.501", y: "134.1", width: "8", height: "0.4" , fill: props.background }),
-        rect({ x: "121.501", y: "114.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "121.501", y: "112.5", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "121.501", y: "110.5", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "121.501", y: "108.5", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "121.501", y: "106.5", width: "8", height: "0.4", fill: props.background })
+        rect({ x: "121.501", y: "124.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "121.501", y: "126.9", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "121.501", y: "129.3", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "121.501", y: "131.7", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "121.501", y: "134.1", width: "8", height: "0.4" , fill: background }),
+        rect({ x: "121.501", y: "114.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "121.501", y: "112.5", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "121.501", y: "110.5", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "121.501", y: "108.5", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "121.501", y: "106.5", width: "8", height: "0.4", fill: background })
       ),
       g(
         { id: "grad_11_" },
-        rect({ x: "141.501", y: "124.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "141.501", y: "126.9", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "141.501", y: "129.3", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "141.501", y: "131.7", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "141.501", y: "134.1", width: "8", height: "0.4" , fill: props.background }),
-        rect({ x: "141.501", y: "114.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "141.501", y: "112.5", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "141.501", y: "110.5", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "141.501", y: "108.5", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "141.501", y: "106.5", width: "8", height: "0.4", fill: props.background })
+        rect({ x: "141.501", y: "124.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "141.501", y: "126.9", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "141.501", y: "129.3", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "141.501", y: "131.7", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "141.501", y: "134.1", width: "8", height: "0.4" , fill: background }),
+        rect({ x: "141.501", y: "114.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "141.501", y: "112.5", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "141.501", y: "110.5", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "141.501", y: "108.5", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "141.501", y: "106.5", width: "8", height: "0.4", fill: background })
       ),
       g(
         { id: "grad_12_" },
-        rect({ x: "151.501", y: "124.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "151.501", y: "126.9", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "151.501", y: "129.3", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "151.501", y: "131.7", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "151.501", y: "134.1", width: "8", height: "0.4" , fill: props.background }),
-        rect({ x: "151.501", y: "114.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "151.501", y: "112.5", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "151.501", y: "110.5", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "151.501", y: "108.5", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "151.501", y: "106.5", width: "8", height: "0.4", fill: props.background })
+        rect({ x: "151.501", y: "124.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "151.501", y: "126.9", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "151.501", y: "129.3", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "151.501", y: "131.7", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "151.501", y: "134.1", width: "8", height: "0.4" , fill: background }),
+        rect({ x: "151.501", y: "114.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "151.501", y: "112.5", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "151.501", y: "110.5", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "151.501", y: "108.5", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "151.501", y: "106.5", width: "8", height: "0.4", fill: background })
       ),
       g(
         { id: "grad_10_" },
-        rect({ x: "176.501", y: "184.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "176.501", y: "186.9", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "176.501", y: "189.3", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "176.501", y: "191.7", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "176.501", y: "174.5", width: "8", height: "2" , fill: props.background }),
-        rect({ x: "176.501", y: "172.5", width: "8", height: "1.6" , fill: props.background }),
-        rect({ x: "176.501", y: "170.5", width: "8", height: "1.2" , fill: props.background }),
-        rect({ x: "176.501", y: "168.5", width: "8", height: "0.8" , fill: props.background }),
-        rect({ x: "176.501", y: "166.5", width: "8", height: "0.4", fill: props.background })
+        rect({ x: "176.501", y: "184.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "176.501", y: "186.9", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "176.501", y: "189.3", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "176.501", y: "191.7", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "176.501", y: "174.5", width: "8", height: "2" , fill: background }),
+        rect({ x: "176.501", y: "172.5", width: "8", height: "1.6" , fill: background }),
+        rect({ x: "176.501", y: "170.5", width: "8", height: "1.2" , fill: background }),
+        rect({ x: "176.501", y: "168.5", width: "8", height: "0.8" , fill: background }),
+        rect({ x: "176.501", y: "166.5", width: "8", height: "0.4", fill: background })
       ),
       g(
         { id: "grad_9_" },
-        rect({ x: "84.501", y: "276.5", width: "2", height: "8" , fill: props.background }),
-        rect({ x: "82.501", y: "276.5", width: "1.6", height: "8" , fill: props.background }),
-        rect({ x: "80.501", y: "276.5", width: "1.2", height: "8" , fill: props.background }),
-        rect({ x: "78.501", y: "276.5", width: "0.8", height: "8" , fill: props.background }),
-        rect({ x: "76.501", y: "276.5", width: "0.4", height: "8" , fill: props.background }),
-        rect({ x: "94.501", y: "276.5", width: "2", height: "8" , fill: props.background }),
-        rect({ x: "96.901", y: "276.5", width: "1.6", height: "8" , fill: props.background }),
-        rect({ x: "99.301", y: "276.5", width: "1.2", height: "8" , fill: props.background }),
-        rect({ x: "101.701", y: "276.5", width: "0.8", height: "8" , fill: props.background }),
-        rect({ x: "104.101", y: "276.5", width: "0.4", height: "8", fill: props.background })
+        rect({ x: "84.501", y: "276.5", width: "2", height: "8" , fill: background }),
+        rect({ x: "82.501", y: "276.5", width: "1.6", height: "8" , fill: background }),
+        rect({ x: "80.501", y: "276.5", width: "1.2", height: "8" , fill: background }),
+        rect({ x: "78.501", y: "276.5", width: "0.8", height: "8" , fill: background }),
+        rect({ x: "76.501", y: "276.5", width: "0.4", height: "8" , fill: background }),
+        rect({ x: "94.501", y: "276.5", width: "2", height: "8" , fill: background }),
+        rect({ x: "96.901", y: "276.5", width: "1.6", height: "8" , fill: background }),
+        rect({ x: "99.301", y: "276.5", width: "1.2", height: "8" , fill: background }),
+        rect({ x: "101.701", y: "276.5", width: "0.8", height: "8" , fill: background }),
+        rect({ x: "104.101", y: "276.5", width: "0.4", height: "8", fill: background })
       ),
-      path({ id: "p_x5F_s2_2_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M236.501,236.5v64c0,3.309-2.691,6-6,6h-8 c-6.065,0-11,4.936-11,11v9h8v-9c0-1.654,1.346-3,3-3h8c7.72,0,14-6.279,14-14v-64H236.501z" }),
-      path({ id: "p_x5F_s2_1_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M244.501,194.5v-64c0-7.72-6.28-14-14-14h-128 c-1.654,0-3-1.346-3-3v-14h-8v14c0,6.065,4.935,11,11,11h128c3.309,0,6,2.691,6,6v64H244.501z" })
+      path({ id: "p_s2_2_", fill: getColor(t.s2), stroke: background, "stroke-miterlimit": "10", d: "M236.501,236.5v64c0,3.309-2.691,6-6,6h-8 c-6.065,0-11,4.936-11,11v9h8v-9c0-1.654,1.346-3,3-3h8c7.72,0,14-6.279,14-14v-64H236.501z" }),
+      path({ id: "p_s2_1_", fill: getColor(t.s2), stroke: background, "stroke-miterlimit": "10", d: "M244.501,194.5v-64c0-7.72-6.28-14-14-14h-128 c-1.654,0-3-1.346-3-3v-14h-8v14c0,6.065,4.935,11,11,11h128c3.309,0,6,2.691,6,6v64H244.501z" })
     ),
     g(
       { id: "gate_paths" },
-      path({ id: "p_x5F_and5", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M205.5,401.5v8h-45c-7.72,0-14-6.279-14-14 v-54.305h8V395.5c0,3.309,2.691,6,6,6H205.5z" }),
-      path({ id: "p_x5F_and4", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M205.5,391.5v8h-15c-7.72,0-14-6.279-14-14 v-44.305h8V385.5c0,3.309,2.691,6,6,6H205.5z" }),
-      path({ id: "p_x5F_or2_1_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M281.501,340.5v50c0,3.309-2.691,6-6,6H217.5v8 h58.001c7.72,0,14-6.279,14-14v-50H281.501z" }),
-      path({ id: "p_x5F_or2_3_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M265.501,375.195c7.721,0,14-6.279,14-14V340.5 h-8v20.695c0,3.309-2.691,6-6,6H220.5c-3.309,0-6-2.691-6-6v-20h-8v20c0,7.721,6.28,14,14,14H265.501z" }),
-      path({ id: "p_x5F_and5_1_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M95.501,29.5v-8h45c7.72,0,14,6.279,14,14v55 h-8v-55c0-3.309-2.69-6-6-6H95.501z" }),
-      path({ id: "p_x5F_and4_1_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M95.501,39.5v-8h15c7.72,0,14,6.279,14,14v45 h-8v-45c0-3.309-2.69-6-6-6H95.501z" }),
-      path({ id: "p_x5F_or2_5_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M29.5,88.195V40.5c0-3.309,2.691-6,6-6h48.001 v-8H35.5c-7.721,0-14,6.279-14,14v47.695H29.5z" }),
-      path({ id: "p_x5F_or2_4_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M94.501,70.5c0-7.721-6.28-14-14-14H45.5 c-7.721,0-14,6.279-14,14v17.695h8V70.5c0-3.309,2.691-6,6-6h35.001c3.31,0,6,2.691,6,6" }),
-      path({ id: "p_x5F_or2_2_", fill: props.foreground, stroke: props.background, "stroke-miterlimit": "10", d: "M86.501,70.5v20h8v-20" })
+      path({ id: "p_and3", fill: getColor(t.and3), stroke: background, "stroke-miterlimit": "10", d: "M205.5,401.5v8h-45c-7.72,0-14-6.279-14-14 v-54.305h8V395.5c0,3.309,2.691,6,6,6H205.5z" }),
+      path({ id: "p_and4", fill: getColor(t.and4), stroke: background, "stroke-miterlimit": "10", d: "M205.5,391.5v8h-15c-7.72,0-14-6.279-14-14 v-44.305h8V385.5c0,3.309,2.691,6,6,6H205.5z" }),
+      path({ id: "p_or3", fill: getColor(t.or2), stroke: background, "stroke-miterlimit": "10", d: "M281.501,340.5v50c0,3.309-2.691,6-6,6H217.5v8 h58.001c7.72,0,14-6.279,14-14v-50H281.501z" }),
+      path({ id: "p_and5", fill: getColor(t.and5), stroke: background, "stroke-miterlimit": "10", d: "M265.501,375.195c7.721,0,14-6.279,14-14V340.5 h-8v20.695c0,3.309-2.691,6-6,6H220.5c-3.309,0-6-2.691-6-6v-20h-8v20c0,7.721,6.28,14,14,14H265.501z" }),
+      path({ id: "p_and2", fill: getColor(t.and2), stroke: background, "stroke-miterlimit": "10", d: "M95.501,29.5v-8h45c7.72,0,14,6.279,14,14v55 h-8v-55c0-3.309-2.69-6-6-6H95.501z" }),
+      path({ id: "p_and1", fill: getColor(t.and1), stroke: background, "stroke-miterlimit": "10", d: "M95.501,39.5v-8h15c7.72,0,14,6.279,14,14v45 h-8v-45c0-3.309-2.69-6-6-6H95.501z" }),
+      path({ id: "p_or1", fill: getColor(t.or1), stroke: background, "stroke-miterlimit": "10", d: "M29.5,88.195V40.5c0-3.309,2.691-6,6-6h48.001 v-8H35.5c-7.721,0-14,6.279-14,14v47.695H29.5z" }),
+      path({ id: "p_and0", fill: getColor(t.and0), stroke: background, "stroke-miterlimit": "10", d: "M94.501,70.5c0-7.721-6.28-14-14-14H45.5 c-7.721,0-14,6.279-14,14v17.695h8V70.5c0-3.309,2.691-6,6-6h35.001c3.31,0,6,2.691,6,6" }),
+      path({ id: "p_and0_1", fill: getColor(t.and0), stroke: background, "stroke-miterlimit": "10", d: "M86.501,70.5v20h8v-20" })
     ),
     g(
       { id: "gates" },
-      path({ id: "g_x5F_or3", fill: props.foreground, stroke: props.background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M280.501,320.5 c-5.973,3.46-10,9.905-10,17.303v5.392c2.943-1.705,6.354-2.693,10-2.693s7.057,0.989,10,2.694v-5.391 C290.501,330.405,286.474,323.961,280.501,320.5z" }),
-      path({ id: "g_x5F_or2", fill: props.foreground, stroke: props.background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M221.5,400.5 c-3.46-5.973-9.905-10-17.303-10h-5.391c1.705,2.943,2.693,6.354,2.693,10s-0.989,7.057-2.693,10h5.391 C211.596,410.5,218.04,406.473,221.5,400.5z" }),
-      path({ id: "g_x5F_or3_1_", fill: props.foreground, stroke: props.background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M30.5,108.195 c5.973-3.46,10-9.905,10-17.303v-5.392c-2.943,1.705-6.354,2.693-10,2.693s-7.057-0.989-10-2.694v5.391 C20.5,98.29,24.527,104.734,30.5,108.195z" }),
-      path({ id: "g_x5F_or2_1_", fill: props.foreground, stroke: props.background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M79.501,30.5 c3.46,5.973,9.905,10,17.304,10h5.391c-1.705-2.943-2.693-6.354-2.693-10s0.989-7.057,2.693-10h-5.391 C89.404,20.5,82.961,24.527,79.501,30.5z" }),
-      path({ id: "g_x5F_and5", fill: props.foreground, stroke: props.background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M220.501,335.5 c0,5.521-4.477,10-10,10s-10-4.479-10-10v-10h20V335.5z" }),
-      path({ id: "g_x5F_and4", fill: props.foreground, stroke: props.background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M190.501,335.5 c0,5.521-4.477,10-10,10s-10-4.479-10-10v-10h20V335.5z" }),
-      path({ id: "g_x5F_and3", fill: props.foreground, stroke: props.background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M160.501,335.5 c0,5.521-4.477,10-10,10s-10-4.479-10-10v-10h20V335.5z" }),
-      path({ id: "g_x5F_and2", fill: props.foreground, stroke: props.background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M140.501,95.5 c0-5.522,4.477-10,10-10s10,4.478,10,10v10h-20V95.5z" }),
-      path({ id: "g_x5F_and1", fill: props.foreground, stroke: props.background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M110.501,95.5 c0-5.522,4.477-10,10-10s10,4.478,10,10v10h-20V95.5z" }),
-      path({ id: "g_x5F_and0", fill: props.foreground, stroke: props.background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M80.501,95.5 c0-5.522,4.477-10,10-10s10,4.478,10,10v10h-20V95.5z" })
+      path({ id: "g_or3", fill: getColor(t.or3), stroke: background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M280.501,320.5 c-5.973,3.46-10,9.905-10,17.303v5.392c2.943-1.705,6.354-2.693,10-2.693s7.057,0.989,10,2.694v-5.391 C290.501,330.405,286.474,323.961,280.501,320.5z" }),
+      path({ id: "g_or2", fill: getColor(t.or2), stroke: background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M221.5,400.5 c-3.46-5.973-9.905-10-17.303-10h-5.391c1.705,2.943,2.693,6.354,2.693,10s-0.989,7.057-2.693,10h5.391 C211.596,410.5,218.04,406.473,221.5,400.5z" }),
+      path({ id: "g_or0", fill: getColor(t.or0), stroke: background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M30.5,108.195 c5.973-3.46,10-9.905,10-17.303v-5.392c-2.943,1.705-6.354,2.693-10,2.693s-7.057-0.989-10-2.694v5.391 C20.5,98.29,24.527,104.734,30.5,108.195z" }),
+      path({ id: "g_or1", fill: getColor(t.or1), stroke: background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M79.501,30.5 c3.46,5.973,9.905,10,17.304,10h5.391c-1.705-2.943-2.693-6.354-2.693-10s0.989-7.057,2.693-10h-5.391 C89.404,20.5,82.961,24.527,79.501,30.5z" }),
+      path({ id: "g_and5", fill: getColor(t.and5), stroke: background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M220.501,335.5 c0,5.521-4.477,10-10,10s-10-4.479-10-10v-10h20V335.5z" }),
+      path({ id: "g_and4", fill: getColor(t.and4), stroke: background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M190.501,335.5 c0,5.521-4.477,10-10,10s-10-4.479-10-10v-10h20V335.5z" }),
+      path({ id: "g_and3", fill: getColor(t.and3), stroke: background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M160.501,335.5 c0,5.521-4.477,10-10,10s-10-4.479-10-10v-10h20V335.5z" }),
+      path({ id: "g_and2", fill: getColor(t.and2), stroke: background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M140.501,95.5 c0-5.522,4.477-10,10-10s10,4.478,10,10v10h-20V95.5z" }),
+      path({ id: "g_and1", fill: getColor(t.and1), stroke: background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M110.501,95.5 c0-5.522,4.477-10,10-10s10,4.478,10,10v10h-20V95.5z" }),
+      path({ id: "g_and0", fill: getColor(t.and0), stroke: background, "strokeWidth": "3", "stroke-miterlimit": "10", d: "M80.501,95.5 c0-5.522,4.477-10,10-10s10,4.478,10,10v10h-20V95.5z" })
     ),
     g(
       { id: "inputs_2_" },
       g(
-        { id: "i_x5F_r1_1_" },
+        { id: "i_r1_1_" },
         g(
           { id: "fist_1_" },
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M171.77,208.702c-0.277-0.594-0.64-1.093-1.277-1.594 c-0.229,0.785-0.934,1.498-1.243,2.203c1.996,0.438,1.09,3.422-0.174,3.998c1.736-0.11,3.342-1.621,3.564-3.043 c0.102-0.657,0.052-0.833,0.434-1.303c0.156,0.308,0.019,0.909,0.174,1.216c0.699,0.033,0.756-0.575,1.304-0.694 c0.081,0.373-0.269,0.575-0.088,0.781c1.444,0.198,2.236-0.718,2.956-0.955c-0.247,0.912-1.246,1.072-2.085,1.392 c0.142,2.348,2.085,2.896,3.129,4.345c1.042,0.363,2.003,0.22,3.304,0.086c-0.309,1.004-1.839,1.384-2.87,0.783 c0.274,0.014,0.524,0.004,0.607-0.173c-0.834,0.024-1.262-0.36-1.912-0.523c-0.698,1.182,0.417,1.814,0.377,2.479 c-0.083,1.423-1.692,1.67-2.637,2.389c-0.145,0.879-0.096,1.46,0,2.347c0.821,0.031,1.718-0.128,2.637-0.254 c1.717-0.232,4.188-0.494,5.271-1.311c1.465-1.102,1.02-3.739,0.435-5.388c0.458,0.152,1.268,0.412,1.826,0.172 c-0.96,0.011-2.508-0.505-1.738-1.39c1.691,0.088,4.344,0.897,5.476-0.26c-0.091-0.721-0.562-1.061-0.869-1.565 c-1.503,0.428-2.78-0.078-3.999,0c-0.216,0.725,0.066,1.443-0.608,1.739c-0.121-0.055-0.013-0.336-0.173-0.348 c-0.209,0.514-0.484,0.964-1.217,0.955c1.251-1.159,0.91-3.757,0-5.041c-0.929-0.563-1.796-1.434-2.782-2.259 c-0.848-0.71-2.102-1.853-3.215-1.912c-0.751-0.04-1.754,0.401-2.606,0.607c-0.88,0.215-1.75,0.459-2.608,0.696 c0.329,0.573,1.044,1.293,1.056,2.193c-0.576,0.025-1.278-0.185-1.463-0.724C171.117,208.445,171.529,208.695,171.77,208.702z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M166.903,209.658c0.24,0.28,0.628,0.415,1.042,0.521 c1.071-0.84,1.299-2.407,2.135-3.483c-1.156-0.113-2.158,0.246-2.851,0.624C166.997,207.867,166.88,208.67,166.903,209.658z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M169.164,212.788c0.474-0.685,0.975-1.341,0.869-2.608 c-0.238,0.065-0.176-0.172-0.348-0.173c-0.241,0.129,0.15,0.355-0.087,0.435c-0.17-0.179-0.41-0.285-0.608-0.435 C167.776,210.525,167.266,212.616,169.164,212.788z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M174.768,211.121c-0.775,0.112-1.525,0.286-1.887-0.062 c-0.226,0.524-0.35,0.708-0.712,1.175c-0.363,0.466-1.476,1.475-2.483,1.598c-1.611,0.196-2.582-1.387-2.433-2.781 c-0.02,0.066-0.073,0.1-0.174,0.085c-0.657,0.035-0.521,2.047-0.472,2.723c0.8,0.674,1.55,0.925,4.874,0.575 c1.625-0.389,4.649-0.463,4.637-0.901C174.53,213.633,174.23,211.595,174.768,211.121z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M176.067,213.207c-0.4-0.461-0.725-0.986-0.862-1.523 C174.525,211.634,175.18,213.358,176.067,213.207z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M187.415,212.092c-0.961,0.003-1.841-0.315-2.87-0.174 C185.595,212.018,186.457,212.279,187.415,212.092z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M168.442,215.12c-0.111,1.438-0.02,1.829,0.53,2.629 c0.174,0.069,0.568,0.51,0.97,0.45c0.879-0.133,2.097-0.268,2.913-0.399c0.883-0.218,2.446-1.021,3.279-1.337 c0.413-0.156,0.567-0.092,0.591-0.199c-0.789-0.242-1.856-0.879-1.217-2c-1.378,0.057-2.652,0.342-3.979,0.643 C170.393,215.094,169.368,215.07,168.442,215.12z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M176.117,215.655c0.212,0.078,0.376,0.204,0.695,0.175 c0.086-0.547,0.086-0.93,0-1.478C175.855,214.133,175.28,214.933,176.117,215.655z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M189.327,214.699c-1.215,0.564-3.442,0.24-4.868,0.348 c1.79,0.402,3.48,0.645,4.954,0.348C189.48,215.067,189.308,214.979,189.327,214.699z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M185.329,219.653c-0.263,0.141-0.513,0.204-0.738,0.291 c-0.062,0.125-0.213,0.312-0.238,0.512c1.15-0.148,2.462,0.051,3.875-0.099c0.368-1.371,1.169-2.544,1.273-4.179 c-1.565,0.058-3.361-0.116-4.78,0.086C185.335,217.227,185.299,218.774,185.329,219.653z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M172.671,221.298c-0.082-0.2-0.132-0.332-0.017-0.583 c0.521-0.458,1.536-0.887,2.25-1.149c0.892-0.328,1.735-0.745,2.081-1.136c-0.726-0.263-0.763-0.976-0.649-1.6 c-0.833,0.166-2.181,0.92-3.381,1.287c-1.016,0.149-1.893,0.175-2.565,0.45c0.07,1.03,0.533,1.717,1.699,2.117 c0.118,0.684,0.467,0.982,0.898,1.231c0.302-0.347,0.468-0.715,0.484-1.165C173.188,220.866,172.954,221.032,172.671,221.298z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M176.671,216.891c-0.351,0.6,0.125,1.398,0.625,1.2 C177.635,217.667,177.721,216.941,176.671,216.891z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M173.421,222.174c0.422,0.158,1.004,0.155,1.478,0.261 c0.104-0.702,0.095-1.139,0.087-2.26c-0.396,0.065-0.821,0.318-1.064,0.457C173.672,221.132,173.539,221.648,173.421,222.174z" })
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r2), d: "M171.77,208.702c-0.277-0.594-0.64-1.093-1.277-1.594 c-0.229,0.785-0.934,1.498-1.243,2.203c1.996,0.438,1.09,3.422-0.174,3.998c1.736-0.11,3.342-1.621,3.564-3.043 c0.102-0.657,0.052-0.833,0.434-1.303c0.156,0.308,0.019,0.909,0.174,1.216c0.699,0.033,0.756-0.575,1.304-0.694 c0.081,0.373-0.269,0.575-0.088,0.781c1.444,0.198,2.236-0.718,2.956-0.955c-0.247,0.912-1.246,1.072-2.085,1.392 c0.142,2.348,2.085,2.896,3.129,4.345c1.042,0.363,2.003,0.22,3.304,0.086c-0.309,1.004-1.839,1.384-2.87,0.783 c0.274,0.014,0.524,0.004,0.607-0.173c-0.834,0.024-1.262-0.36-1.912-0.523c-0.698,1.182,0.417,1.814,0.377,2.479 c-0.083,1.423-1.692,1.67-2.637,2.389c-0.145,0.879-0.096,1.46,0,2.347c0.821,0.031,1.718-0.128,2.637-0.254 c1.717-0.232,4.188-0.494,5.271-1.311c1.465-1.102,1.02-3.739,0.435-5.388c0.458,0.152,1.268,0.412,1.826,0.172 c-0.96,0.011-2.508-0.505-1.738-1.39c1.691,0.088,4.344,0.897,5.476-0.26c-0.091-0.721-0.562-1.061-0.869-1.565 c-1.503,0.428-2.78-0.078-3.999,0c-0.216,0.725,0.066,1.443-0.608,1.739c-0.121-0.055-0.013-0.336-0.173-0.348 c-0.209,0.514-0.484,0.964-1.217,0.955c1.251-1.159,0.91-3.757,0-5.041c-0.929-0.563-1.796-1.434-2.782-2.259 c-0.848-0.71-2.102-1.853-3.215-1.912c-0.751-0.04-1.754,0.401-2.606,0.607c-0.88,0.215-1.75,0.459-2.608,0.696 c0.329,0.573,1.044,1.293,1.056,2.193c-0.576,0.025-1.278-0.185-1.463-0.724C171.117,208.445,171.529,208.695,171.77,208.702z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r2), d: "M166.903,209.658c0.24,0.28,0.628,0.415,1.042,0.521 c1.071-0.84,1.299-2.407,2.135-3.483c-1.156-0.113-2.158,0.246-2.851,0.624C166.997,207.867,166.88,208.67,166.903,209.658z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r2), d: "M169.164,212.788c0.474-0.685,0.975-1.341,0.869-2.608 c-0.238,0.065-0.176-0.172-0.348-0.173c-0.241,0.129,0.15,0.355-0.087,0.435c-0.17-0.179-0.41-0.285-0.608-0.435 C167.776,210.525,167.266,212.616,169.164,212.788z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r2), d: "M174.768,211.121c-0.775,0.112-1.525,0.286-1.887-0.062 c-0.226,0.524-0.35,0.708-0.712,1.175c-0.363,0.466-1.476,1.475-2.483,1.598c-1.611,0.196-2.582-1.387-2.433-2.781 c-0.02,0.066-0.073,0.1-0.174,0.085c-0.657,0.035-0.521,2.047-0.472,2.723c0.8,0.674,1.55,0.925,4.874,0.575 c1.625-0.389,4.649-0.463,4.637-0.901C174.53,213.633,174.23,211.595,174.768,211.121z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r2), d: "M176.067,213.207c-0.4-0.461-0.725-0.986-0.862-1.523 C174.525,211.634,175.18,213.358,176.067,213.207z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r2), d: "M187.415,212.092c-0.961,0.003-1.841-0.315-2.87-0.174 C185.595,212.018,186.457,212.279,187.415,212.092z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r2), d: "M168.442,215.12c-0.111,1.438-0.02,1.829,0.53,2.629 c0.174,0.069,0.568,0.51,0.97,0.45c0.879-0.133,2.097-0.268,2.913-0.399c0.883-0.218,2.446-1.021,3.279-1.337 c0.413-0.156,0.567-0.092,0.591-0.199c-0.789-0.242-1.856-0.879-1.217-2c-1.378,0.057-2.652,0.342-3.979,0.643 C170.393,215.094,169.368,215.07,168.442,215.12z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r2), d: "M176.117,215.655c0.212,0.078,0.376,0.204,0.695,0.175 c0.086-0.547,0.086-0.93,0-1.478C175.855,214.133,175.28,214.933,176.117,215.655z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r2), d: "M189.327,214.699c-1.215,0.564-3.442,0.24-4.868,0.348 c1.79,0.402,3.48,0.645,4.954,0.348C189.48,215.067,189.308,214.979,189.327,214.699z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r2), d: "M185.329,219.653c-0.263,0.141-0.513,0.204-0.738,0.291 c-0.062,0.125-0.213,0.312-0.238,0.512c1.15-0.148,2.462,0.051,3.875-0.099c0.368-1.371,1.169-2.544,1.273-4.179 c-1.565,0.058-3.361-0.116-4.78,0.086C185.335,217.227,185.299,218.774,185.329,219.653z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r2), d: "M172.671,221.298c-0.082-0.2-0.132-0.332-0.017-0.583 c0.521-0.458,1.536-0.887,2.25-1.149c0.892-0.328,1.735-0.745,2.081-1.136c-0.726-0.263-0.763-0.976-0.649-1.6 c-0.833,0.166-2.181,0.92-3.381,1.287c-1.016,0.149-1.893,0.175-2.565,0.45c0.07,1.03,0.533,1.717,1.699,2.117 c0.118,0.684,0.467,0.982,0.898,1.231c0.302-0.347,0.468-0.715,0.484-1.165C173.188,220.866,172.954,221.032,172.671,221.298z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r2), d: "M176.671,216.891c-0.351,0.6,0.125,1.398,0.625,1.2 C177.635,217.667,177.721,216.941,176.671,216.891z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r2), d: "M173.421,222.174c0.422,0.158,1.004,0.155,1.478,0.261 c0.104-0.702,0.095-1.139,0.087-2.26c-0.396,0.065-0.821,0.318-1.064,0.457C173.672,221.132,173.539,221.648,173.421,222.174z" })
         )
       ),
       g(
-        { id: "i_x5F_p1_2_" },
+        { id: "i_p1_2_" },
         g(
           { id: "open_1_" },
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M206.909,210.236c-0.914,0.267-0.719,1.995-1.265,2.761 c-0.032,0.217,0.187,0.182,0.208,0.346c-0.636,0.437-0.629,2.53,0.208,2.842l0.113,0.52c-0.093,0.118-0.297-0.01-0.251,0.243 l1.733,2.704c0.267,0.519,0.483,1.088,0.694,1.664c0.569,0.164,1.211,0.345,1.94,0.417c2.769,0.27,6.763-0.5,9.221-2.08 c0.443-1.305-0.055-2.786-0.417-3.744c0.422,0.247,0.38,0.441,0.902,0.347c0.446,0.784,1.001,2.409,0.278,3.328 c1.162,0.086,2.187,0.31,3.397,0.348c0.401-1.125,0.83-2.22,0.831-3.745c-1.462,0.065-2.753-0.198-4.021-0.277 c-0.382-0.024-1.054,0.168-1.248-0.277c0.263-0.076,0.432,0.183,0.485-0.07c-0.422-0.017-0.447-0.431-0.902-0.416l0.234-1.444 c-1.043,0.491-1.237,1.365-2.653,1.365c-1.867,0-3.832-1.123-4.503-2.781c1.084,1.811,4.786,3.56,6.488,1.325 c0.76-3.428-1.754-4.86-3.84-6.49c-0.796-0.622-1.286-1.664-2.25-1.588c0.176-0.945-1.315-1.559-1.987-2.12 c-0.33-0.46-0.493-0.686-0.901-0.91c-0.557,0.102-0.894,0.296-0.953,0.778c-0.2,1.611,1.125,2.72,1.987,3.443 c0.824,0.073,1.261-0.24,1.855-0.397c-0.231,0.476-0.739,0.674-1.325,0.794c0.236,0.735,0.797,1.146,1.325,1.59 c0.773,0.067,1.101-0.312,1.721-0.397c-0.404,0.567-1.629,0.312-1.721,1.191c0.482,0.083,1.585-0.354,2.25-0.529 c-0.814,0.512-2.735,1.061-3.312,2.251c-0.307-0.273,0.375-0.679,0.397-1.06c-0.513-0.158-0.924,0.927-1.589,1.06 c0.273-0.478,0.787-0.715,1.059-1.192c-1.52,0.452-2.641,0.122-3.528,0.268L206.909,210.236z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M195.799,213.343c0.916,0.81,2.537,0.276,3.744,0.069 c0-0.739,0-1.479,0-2.218c-1.178,0.086-2.813,0.474-3.504,0.897C195.901,212.321,195.699,212.789,195.799,213.343z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M203.01,210.639c-0.63,0.46-0.668,1.795-0.347,2.634 c2.51,0.407,3.034-1.172,3.466-2.842C205.451,210.355,204.113,210.447,203.01,210.639z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M200.029,210.917c-0.513,0.692-0.272,1.551-0.139,2.495 c0.766,0.111,1.495,0.247,2.219-0.069c-0.382-0.857,0.233-1.633,0.139-2.634C201.43,210.825,200.778,210.859,200.029,210.917z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M219.718,214.66c1.48,0.046,3.283,0.54,4.645,0.208 c0.06-0.846-0.014-1.557-0.484-1.871c-1.294-0.076-2.892-0.312-4.091-0.486C219.635,213.531,220.132,214.124,219.718,214.66z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M201.831,213.897c-0.007,0.829-0.003,1.858,0.069,2.219 c1.016,0.104,2.543,0.147,3.12-0.417c0.21-0.533-0.324-1.215-0.069-1.802C203.988,213.506,202.745,213.569,201.831,213.897z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M198.85,213.897c-0.434,0.418-0.576,1.604-0.208,2.219 c0.978,0.456,1.785,0.02,2.843,0c-0.063-0.745-0.175-1.443-0.139-2.288C200.493,213.843,199.396,213.783,198.85,213.897z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M194.205,215.493c0.581,1.421,2.81,0.556,3.951,0.692 c0-0.67,0-1.34,0-2.01C196.717,214.056,193.467,213.683,194.205,215.493z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M219.718,215.145c1.492,0.196,3.529,0.551,4.783,0.416 C223.085,215.312,221.219,215.034,219.718,215.145z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M222.63,215.77c-1.176-0.177-1.922-0.158-2.843-0.209 C220.522,215.798,221.812,215.846,222.63,215.77z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M202.663,216.74c0.072,0.692,0.152,1.375,0.486,1.801 c0.805,0.002,1.81,0.057,2.495-0.208C206.408,216.512,203.912,215.995,202.663,216.74z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M199.89,216.602c-0.451,0.392-0.263,1.047-0.277,1.802 c1.057-0.018,2.05,0.028,2.981,0.138c-0.076-0.663-0.154-1.324-0.278-1.94C201.183,216.675,200.844,216.431,199.89,216.602z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M195.314,217.85c0.499,1.141,2.578,0.703,4.021,0.9 c0-0.669,0-1.34,0-2.01C197.927,216.993,195.208,215.725,195.314,217.85z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M205.366,220.899c0.632,0.101,1.437,0.144,2.357,0.208 c-0.301-0.695-0.509-1.842-1.524-1.594c-0.324-0.255-0.571-0.584-1.042-0.694C204.886,219.443,205.41,220.087,205.366,220.899z"
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p2), d: "M206.909,210.236c-0.914,0.267-0.719,1.995-1.265,2.761 c-0.032,0.217,0.187,0.182,0.208,0.346c-0.636,0.437-0.629,2.53,0.208,2.842l0.113,0.52c-0.093,0.118-0.297-0.01-0.251,0.243 l1.733,2.704c0.267,0.519,0.483,1.088,0.694,1.664c0.569,0.164,1.211,0.345,1.94,0.417c2.769,0.27,6.763-0.5,9.221-2.08 c0.443-1.305-0.055-2.786-0.417-3.744c0.422,0.247,0.38,0.441,0.902,0.347c0.446,0.784,1.001,2.409,0.278,3.328 c1.162,0.086,2.187,0.31,3.397,0.348c0.401-1.125,0.83-2.22,0.831-3.745c-1.462,0.065-2.753-0.198-4.021-0.277 c-0.382-0.024-1.054,0.168-1.248-0.277c0.263-0.076,0.432,0.183,0.485-0.07c-0.422-0.017-0.447-0.431-0.902-0.416l0.234-1.444 c-1.043,0.491-1.237,1.365-2.653,1.365c-1.867,0-3.832-1.123-4.503-2.781c1.084,1.811,4.786,3.56,6.488,1.325 c0.76-3.428-1.754-4.86-3.84-6.49c-0.796-0.622-1.286-1.664-2.25-1.588c0.176-0.945-1.315-1.559-1.987-2.12 c-0.33-0.46-0.493-0.686-0.901-0.91c-0.557,0.102-0.894,0.296-0.953,0.778c-0.2,1.611,1.125,2.72,1.987,3.443 c0.824,0.073,1.261-0.24,1.855-0.397c-0.231,0.476-0.739,0.674-1.325,0.794c0.236,0.735,0.797,1.146,1.325,1.59 c0.773,0.067,1.101-0.312,1.721-0.397c-0.404,0.567-1.629,0.312-1.721,1.191c0.482,0.083,1.585-0.354,2.25-0.529 c-0.814,0.512-2.735,1.061-3.312,2.251c-0.307-0.273,0.375-0.679,0.397-1.06c-0.513-0.158-0.924,0.927-1.589,1.06 c0.273-0.478,0.787-0.715,1.059-1.192c-1.52,0.452-2.641,0.122-3.528,0.268L206.909,210.236z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p2), d: "M195.799,213.343c0.916,0.81,2.537,0.276,3.744,0.069 c0-0.739,0-1.479,0-2.218c-1.178,0.086-2.813,0.474-3.504,0.897C195.901,212.321,195.699,212.789,195.799,213.343z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p2), d: "M203.01,210.639c-0.63,0.46-0.668,1.795-0.347,2.634 c2.51,0.407,3.034-1.172,3.466-2.842C205.451,210.355,204.113,210.447,203.01,210.639z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p2), d: "M200.029,210.917c-0.513,0.692-0.272,1.551-0.139,2.495 c0.766,0.111,1.495,0.247,2.219-0.069c-0.382-0.857,0.233-1.633,0.139-2.634C201.43,210.825,200.778,210.859,200.029,210.917z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p2), d: "M219.718,214.66c1.48,0.046,3.283,0.54,4.645,0.208 c0.06-0.846-0.014-1.557-0.484-1.871c-1.294-0.076-2.892-0.312-4.091-0.486C219.635,213.531,220.132,214.124,219.718,214.66z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p2), d: "M201.831,213.897c-0.007,0.829-0.003,1.858,0.069,2.219 c1.016,0.104,2.543,0.147,3.12-0.417c0.21-0.533-0.324-1.215-0.069-1.802C203.988,213.506,202.745,213.569,201.831,213.897z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p2), d: "M198.85,213.897c-0.434,0.418-0.576,1.604-0.208,2.219 c0.978,0.456,1.785,0.02,2.843,0c-0.063-0.745-0.175-1.443-0.139-2.288C200.493,213.843,199.396,213.783,198.85,213.897z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p2), d: "M194.205,215.493c0.581,1.421,2.81,0.556,3.951,0.692 c0-0.67,0-1.34,0-2.01C196.717,214.056,193.467,213.683,194.205,215.493z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p2), d: "M219.718,215.145c1.492,0.196,3.529,0.551,4.783,0.416 C223.085,215.312,221.219,215.034,219.718,215.145z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p2), d: "M222.63,215.77c-1.176-0.177-1.922-0.158-2.843-0.209 C220.522,215.798,221.812,215.846,222.63,215.77z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p2), d: "M202.663,216.74c0.072,0.692,0.152,1.375,0.486,1.801 c0.805,0.002,1.81,0.057,2.495-0.208C206.408,216.512,203.912,215.995,202.663,216.74z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p2), d: "M199.89,216.602c-0.451,0.392-0.263,1.047-0.277,1.802 c1.057-0.018,2.05,0.028,2.981,0.138c-0.076-0.663-0.154-1.324-0.278-1.94C201.183,216.675,200.844,216.431,199.89,216.602z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p2), d: "M195.314,217.85c0.499,1.141,2.578,0.703,4.021,0.9 c0-0.669,0-1.34,0-2.01C197.927,216.993,195.208,215.725,195.314,217.85z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p2), d: "M205.366,220.899c0.632,0.101,1.437,0.144,2.357,0.208 c-0.301-0.695-0.509-1.842-1.524-1.594c-0.324-0.255-0.571-0.584-1.042-0.694C204.886,219.443,205.41,220.087,205.366,220.899z"
           }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M202.871,219.167c0.012,0.538-0.151,0.876,0,1.456 c0.449,0.45,1.323,0.138,2.011,0.208c-0.125-0.368-0.039-1.424-0.138-1.871C204.051,219.004,203.322,218.666,202.871,219.167z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M202.175,220.826c0.157,0.004,0.336,0.016,0.418,0.004 c-0.14-0.46-0.039-1.164-0.07-1.733c-1.138-0.085-2.029-0.449-3.05-0.138c-0.242,0.374-0.088,1.059,0.101,1.186 C199.764,220.271,202.175,220.826,202.175,220.826z" })
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p2), d: "M202.871,219.167c0.012,0.538-0.151,0.876,0,1.456 c0.449,0.45,1.323,0.138,2.011,0.208c-0.125-0.368-0.039-1.424-0.138-1.871C204.051,219.004,203.322,218.666,202.871,219.167z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p2), d: "M202.175,220.826c0.157,0.004,0.336,0.016,0.418,0.004 c-0.14-0.46-0.039-1.164-0.07-1.733c-1.138-0.085-2.029-0.449-3.05-0.138c-0.242,0.374-0.088,1.059,0.101,1.186 C199.764,220.271,202.175,220.826,202.175,220.826z" })
         )
       ),
       g(
-        { id: "i_x5F_s1_1_" },
+        { id: "i_s1_1_" },
         g(
           { id: "v_1_" },
-          path({ fill: props.foreground, d: "M256.052,219.912c0.664-1.482-0.261-3.667-0.542-4.293c-1.662,1.039-3.766,1.262-5.522,0.87 c-0.108,1.126,1.039,0.995,1.744,1.308c-0.344,0.429-0.881-0.175-1.308-0.145c0.238,1.691-0.842,2.112-1.832,2.606 c0,0.995-0.144,0.863-0.202,1.752c2.105-0.067,4.334-0.839,6.367-1.459L256.052,219.912z" }),
-          path({ fill: props.foreground, d: "M237.492,211.694c0.9,0.552,2.345,0.56,3.052,1.308c0.516,1.13,0.473,2.819,1.018,3.923 c1.534-0.579,1.79-2.775,1.888-4.36c-0.122,0.607,0.282,0.686,0.292,1.163c0.746-0.172,0.865-0.975,1.597-1.163 c0.014-0.458-0.539-1.096-0.145-1.453c0.016,0.536,0.266,0.42,0.435,0.146c0,0.242,0,0.484,0,0.726 c0.936-0.323,1.25-1.269,2.034-1.743c-1.306-0.136-3.343,0.008-5.521-0.29c-1.128,0.567-0.695,2.245-1.598,2.76 c0.093-1.166,0.656-1.862,1.018-2.76c-1.102-0.305-2.125-0.686-3.487-0.728c-0.014,0.473-0.076,0.894-0.291,1.163 c-0.125-0.579,0.218-1.073,0-1.307c-2.347-0.037-7.269-1.318-7.12,0.872c0.088,1.272,1.968,1.153,3.632,1.162 c0.046-0.439-0.161-1.129,0.291-1.162c0.071,0.458-0.262,0.513-0.146,1.017c0.648,0.465,1.628,0.599,2.616,0.726 c0.177-0.219,0.483-1.054,0.726-0.726C237.481,211.006,237.744,211.606,237.492,211.694z" }),
-          path({ fill: props.foreground, d: "M246.501,216.054c0.982-0.52,1.528-1.477,1.889-2.616c0.311,0.09,0.136,0.895,0,1.018 c0.819,0.183,0.832-1.197,1.308-0.873c-0.034,0.317-0.655,0.781-0.291,1.017c0.421-0.213,0.911-1.116,1.307-0.872 c-0.359,0.705-1.237,0.894-1.598,1.597c2.807,1.921,6.856,0.795,6.249-2.76c-0.457-2.659-4.388-2.349-6.684-1.889 c0.452-0.069,0.704,0.182,0.436,0.437c-0.401-0.18-0.738-0.424-1.307-0.437c-1.167,1.415-3.369,2.521-3.777,4.215 c-0.197-0.046-0.278-0.208-0.582-0.146c-0.182,0.64-0.448,1.199-0.726,1.742c2.206-0.052,1.138,3.127-0.292,2.617 C244.641,219.991,246.124,217.936,246.501,216.054z" }),
-          path({ fill: props.foreground, d: "M256.38,216.488c-0.223-0.438,0.752-0.382,0.728-0.145c-0.989,0.68-0.043,1.854-0.559,3.173 c0.851,0.462,2.349-0.031,3.755-0.121c0.308-0.903,0.322-2.099,0.29-3.341c-1.246,0.095-2.562,0.65-3.486,0 c1.664,0.039,2.409-0.036,3.632-0.292c0.137-0.863-1.332-0.122-1.598-0.581c0.532,0,1.065,0,1.598,0 c0.021-1.489-0.424-3.238-1.744-2.906h-0.145c-1.574-0.027-1.557-0.12-2.906,0c0.35,0.666-0.174,2.207,0.582,2.471 c-0.279,0.061-0.626,0.053-0.582,0.436c0.426,0.215,0.54-0.164,0.727,0.29c-0.211,0.08-0.751-0.169-0.727,0.147 c0.129,0.084,0.828,0.304,0.435,0.436c-0.25,0.056-0.372-0.217-0.435,0C256.219,216.07,256.045,216.533,256.38,216.488z" }),
-          path({ fill: props.foreground, d: "M240.398,214.601c-1.112,0.339-2.915-0.009-3.633,0.725c-0.568-0.719-1.866,0.234-2.615,0.292 c0.015,0.596,0.024,1.185-0.29,1.452c0-0.437,0-0.872,0-1.308c-1.999,0.278-4.409,0.143-4.359,2.47 c1.124,0.8,4.246,0.567,4.649-0.727c0.216,1.302,2.126,0.009,2.761,0.437c-0.056-0.659-0.192-1.083,0.145-1.599 c0,0.581,0.29,0.872,0.291,1.453c1.315-0.185,2.548-0.453,3.777-0.726C241.229,215.899,240.476,215.587,240.398,214.601z" }),
-          path({ fill: props.foreground, d: "M248.099,216.344c0.235,0.191,1.281,0.314,1.308-0.146c-0.411-0.218-0.671-0.588-1.308-0.58 C248.099,215.859,248.099,216.102,248.099,216.344z" }),
-          path({ fill: props.foreground, d: "M247.082,217.36c-0.326-0.631-0.733,0.299-0.871,0.727c1.237-0.264,2.554-0.449,3.196-1.308 c-1.223,0.255-1.617-0.32-2.178-0.726C246.984,216.295,247.112,216.906,247.082,217.36z" }),
-          path({ fill: props.foreground, d: "M242.579,217.07c-0.145,0.487-0.583,0.676-0.727,1.162c0.607,0.923,1.792,0.396,1.874-0.777 C243.317,217.282,243.051,217.179,242.579,217.07z" }),
-          path({ fill: props.foreground, d: "M248.983,217.784c0.391,0.248,0.804,0.35,1.073,0.207C249.952,217.496,248.97,217.554,248.983,217.784z"
+          path({ fill: getColor(t.s2), d: "M256.052,219.912c0.664-1.482-0.261-3.667-0.542-4.293c-1.662,1.039-3.766,1.262-5.522,0.87 c-0.108,1.126,1.039,0.995,1.744,1.308c-0.344,0.429-0.881-0.175-1.308-0.145c0.238,1.691-0.842,2.112-1.832,2.606 c0,0.995-0.144,0.863-0.202,1.752c2.105-0.067,4.334-0.839,6.367-1.459L256.052,219.912z" }),
+          path({ fill: getColor(t.s2), d: "M237.492,211.694c0.9,0.552,2.345,0.56,3.052,1.308c0.516,1.13,0.473,2.819,1.018,3.923 c1.534-0.579,1.79-2.775,1.888-4.36c-0.122,0.607,0.282,0.686,0.292,1.163c0.746-0.172,0.865-0.975,1.597-1.163 c0.014-0.458-0.539-1.096-0.145-1.453c0.016,0.536,0.266,0.42,0.435,0.146c0,0.242,0,0.484,0,0.726 c0.936-0.323,1.25-1.269,2.034-1.743c-1.306-0.136-3.343,0.008-5.521-0.29c-1.128,0.567-0.695,2.245-1.598,2.76 c0.093-1.166,0.656-1.862,1.018-2.76c-1.102-0.305-2.125-0.686-3.487-0.728c-0.014,0.473-0.076,0.894-0.291,1.163 c-0.125-0.579,0.218-1.073,0-1.307c-2.347-0.037-7.269-1.318-7.12,0.872c0.088,1.272,1.968,1.153,3.632,1.162 c0.046-0.439-0.161-1.129,0.291-1.162c0.071,0.458-0.262,0.513-0.146,1.017c0.648,0.465,1.628,0.599,2.616,0.726 c0.177-0.219,0.483-1.054,0.726-0.726C237.481,211.006,237.744,211.606,237.492,211.694z" }),
+          path({ fill: getColor(t.s2), d: "M246.501,216.054c0.982-0.52,1.528-1.477,1.889-2.616c0.311,0.09,0.136,0.895,0,1.018 c0.819,0.183,0.832-1.197,1.308-0.873c-0.034,0.317-0.655,0.781-0.291,1.017c0.421-0.213,0.911-1.116,1.307-0.872 c-0.359,0.705-1.237,0.894-1.598,1.597c2.807,1.921,6.856,0.795,6.249-2.76c-0.457-2.659-4.388-2.349-6.684-1.889 c0.452-0.069,0.704,0.182,0.436,0.437c-0.401-0.18-0.738-0.424-1.307-0.437c-1.167,1.415-3.369,2.521-3.777,4.215 c-0.197-0.046-0.278-0.208-0.582-0.146c-0.182,0.64-0.448,1.199-0.726,1.742c2.206-0.052,1.138,3.127-0.292,2.617 C244.641,219.991,246.124,217.936,246.501,216.054z" }),
+          path({ fill: getColor(t.s2), d: "M256.38,216.488c-0.223-0.438,0.752-0.382,0.728-0.145c-0.989,0.68-0.043,1.854-0.559,3.173 c0.851,0.462,2.349-0.031,3.755-0.121c0.308-0.903,0.322-2.099,0.29-3.341c-1.246,0.095-2.562,0.65-3.486,0 c1.664,0.039,2.409-0.036,3.632-0.292c0.137-0.863-1.332-0.122-1.598-0.581c0.532,0,1.065,0,1.598,0 c0.021-1.489-0.424-3.238-1.744-2.906h-0.145c-1.574-0.027-1.557-0.12-2.906,0c0.35,0.666-0.174,2.207,0.582,2.471 c-0.279,0.061-0.626,0.053-0.582,0.436c0.426,0.215,0.54-0.164,0.727,0.29c-0.211,0.08-0.751-0.169-0.727,0.147 c0.129,0.084,0.828,0.304,0.435,0.436c-0.25,0.056-0.372-0.217-0.435,0C256.219,216.07,256.045,216.533,256.38,216.488z" }),
+          path({ fill: getColor(t.s2), d: "M240.398,214.601c-1.112,0.339-2.915-0.009-3.633,0.725c-0.568-0.719-1.866,0.234-2.615,0.292 c0.015,0.596,0.024,1.185-0.29,1.452c0-0.437,0-0.872,0-1.308c-1.999,0.278-4.409,0.143-4.359,2.47 c1.124,0.8,4.246,0.567,4.649-0.727c0.216,1.302,2.126,0.009,2.761,0.437c-0.056-0.659-0.192-1.083,0.145-1.599 c0,0.581,0.29,0.872,0.291,1.453c1.315-0.185,2.548-0.453,3.777-0.726C241.229,215.899,240.476,215.587,240.398,214.601z" }),
+          path({ fill: getColor(t.s2), d: "M248.099,216.344c0.235,0.191,1.281,0.314,1.308-0.146c-0.411-0.218-0.671-0.588-1.308-0.58 C248.099,215.859,248.099,216.102,248.099,216.344z" }),
+          path({ fill: getColor(t.s2), d: "M247.082,217.36c-0.326-0.631-0.733,0.299-0.871,0.727c1.237-0.264,2.554-0.449,3.196-1.308 c-1.223,0.255-1.617-0.32-2.178-0.726C246.984,216.295,247.112,216.906,247.082,217.36z" }),
+          path({ fill: getColor(t.s2), d: "M242.579,217.07c-0.145,0.487-0.583,0.676-0.727,1.162c0.607,0.923,1.792,0.396,1.874-0.777 C243.317,217.282,243.051,217.179,242.579,217.07z" }),
+          path({ fill: getColor(t.s2), d: "M248.983,217.784c0.391,0.248,0.804,0.35,1.073,0.207C249.952,217.496,248.97,217.554,248.983,217.784z"
           }),
-          path({ fill: props.foreground, d: "M244.302,220.052c0.185,0.413,0.434,0.721,0.784,1.052c0.413-0.042,0.784,0,0.948,0.165 c-0.165,0.124-0.56,0.003-0.619,0.206c0.903,0.258,1.567,0.516,2.538,0.535c0.156-0.423,0.325-0.836,0.29-1.453 c-0.416,0.258-0.91,0.773-1.108,1.032c-0.132,0.03-0.38-0.114-0.49-0.306c0.993-1.139,3.037-1.726,3.487-2.905 c-0.717,0.21-1.068-0.079-1.598-0.582c-0.83,0.441-1.779,0.69-2.541,0.73C245.437,219.291,244.543,219.943,244.302,220.052z" })
+          path({ fill: getColor(t.s2), d: "M244.302,220.052c0.185,0.413,0.434,0.721,0.784,1.052c0.413-0.042,0.784,0,0.948,0.165 c-0.165,0.124-0.56,0.003-0.619,0.206c0.903,0.258,1.567,0.516,2.538,0.535c0.156-0.423,0.325-0.836,0.29-1.453 c-0.416,0.258-0.91,0.773-1.108,1.032c-0.132,0.03-0.38-0.114-0.49-0.306c0.993-1.139,3.037-1.726,3.487-2.905 c-0.717,0.21-1.068-0.079-1.598-0.582c-0.83,0.441-1.779,0.69-2.541,0.73C245.437,219.291,244.543,219.943,244.302,220.052z" })
         )
       ),
       g(
-        { id: "i_x5F_r1" },
+        { id: "i_r1" },
         g(
           { id: "fist" },
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M64.771,208.346c-0.185,0.539-0.887,0.749-1.463,0.724 c0.012-0.9,0.728-1.621,1.056-2.193c-0.859-0.237-1.729-0.481-2.608-0.696c-0.853-0.206-1.855-0.646-2.606-0.607 c-1.113,0.059-2.367,1.201-3.215,1.912c-0.985,0.826-1.853,1.696-2.782,2.259c-0.91,1.284-1.251,3.882,0,5.041 c-0.733,0.009-1.008-0.441-1.217-0.955c-0.16,0.012-0.053,0.293-0.173,0.348c-0.675-0.296-0.392-1.014-0.608-1.739 c-1.218-0.078-2.495,0.428-3.999,0c-0.306,0.504-0.778,0.844-0.869,1.565c1.131,1.158,3.784,0.348,5.476,0.26 c0.77,0.885-0.778,1.401-1.738,1.39c0.559,0.239,1.368-0.02,1.826-0.172c-0.585,1.649-1.031,4.286,0.435,5.388 c1.083,0.816,3.555,1.079,5.271,1.311c0.918,0.125,1.815,0.285,2.637,0.254c0.096-0.887,0.145-1.468,0-2.347 c-0.944-0.718-2.554-0.966-2.637-2.389c-0.04-0.665,1.076-1.297,0.377-2.479c-0.65,0.163-1.077,0.547-1.912,0.523 c0.083,0.177,0.333,0.187,0.607,0.173c-1.031,0.602-2.561,0.222-2.87-0.783c1.301,0.134,2.262,0.277,3.304-0.086 c1.043-1.449,2.987-1.997,3.129-4.345c-0.839-0.32-1.839-0.48-2.085-1.392c0.719,0.237,1.512,1.153,2.956,0.955 c0.181-0.207-0.169-0.409-0.088-0.781c0.548,0.119,0.605,0.728,1.304,0.694c0.155-0.307,0.018-0.908,0.174-1.216 c0.381,0.47,0.332,0.646,0.434,1.303c0.222,1.422,1.828,2.933,3.564,3.043c-1.265-0.576-2.17-3.56-0.174-3.998 c-0.309-0.705-1.013-1.418-1.243-2.203c-0.637,0.501-1,1-1.277,1.594C63.997,208.695,64.409,208.445,64.771,208.346z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M68.296,207.32c-0.692-0.378-1.694-0.737-2.851-0.624 c0.835,1.076,1.064,2.643,2.135,3.483c0.414-0.106,0.802-0.241,1.042-0.521C68.646,208.67,68.529,207.867,68.296,207.32z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M66.537,210.006c-0.199,0.149-0.438,0.256-0.608,0.435 c-0.237-0.079,0.154-0.305-0.087-0.435c-0.172,0-0.11,0.238-0.348,0.173c-0.105,1.267,0.396,1.924,0.869,2.608 C68.26,212.616,67.75,210.525,66.537,210.006z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M59.409,213.532c-0.013,0.438,3.011,0.512,4.637,0.901 c3.324,0.35,4.074,0.099,4.874-0.575c0.05-0.675,0.186-2.688-0.472-2.723c-0.101,0.015-0.154-0.019-0.174-0.085 c0.149,1.394-0.822,2.977-2.433,2.781c-1.007-0.124-2.12-1.132-2.483-1.598c-0.362-0.466-0.486-0.65-0.712-1.175 c-0.362,0.349-1.112,0.175-1.887,0.062C61.296,211.595,60.996,213.633,59.409,213.532z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M60.321,211.684c-0.137,0.537-0.461,1.062-0.862,1.523 C60.346,213.358,61.001,211.634,60.321,211.684z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M50.98,211.918c-1.028-0.142-1.909,0.177-2.87,0.174 C49.069,212.279,49.931,212.018,50.98,211.918z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M63.997,214.907c-1.326-0.3-2.601-0.585-3.979-0.643 c0.639,1.12-0.429,1.758-1.217,2c0.024,0.107,0.178,0.042,0.591,0.199c0.833,0.316,2.396,1.119,3.279,1.337 c0.816,0.132,2.034,0.266,2.913,0.399c0.402,0.06,0.796-0.381,0.97-0.45c0.55-0.801,0.641-1.192,0.53-2.629 C66.158,215.07,65.133,215.094,63.997,214.907z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M58.714,214.352c-0.086,0.548-0.086,0.931,0,1.478 c0.319,0.029,0.483-0.097,0.695-0.175C60.246,214.933,59.67,214.133,58.714,214.352z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M46.112,215.395c1.474,0.297,3.165,0.054,4.954-0.348 c-1.425-0.108-3.652,0.216-4.868-0.348C46.218,214.979,46.045,215.067,46.112,215.395z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M50.805,216.264c-1.419-0.202-3.215-0.028-4.78-0.086 c0.104,1.635,0.905,2.808,1.273,4.179c1.412,0.15,2.725-0.049,3.875,0.099c-0.025-0.199-0.176-0.387-0.238-0.512 c-0.225-0.087-0.475-0.15-0.738-0.291C50.227,218.774,50.19,217.227,50.805,216.264z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M62.055,220.749c0.017,0.45,0.183,0.818,0.484,1.165 c0.432-0.249,0.781-0.547,0.898-1.231c1.167-0.4,1.629-1.087,1.699-2.117c-0.672-0.274-1.549-0.3-2.565-0.45 c-1.201-0.366-2.548-1.121-3.381-1.287c0.113,0.624,0.077,1.336-0.649,1.6c0.345,0.391,1.188,0.808,2.081,1.136 c0.714,0.262,1.729,0.691,2.25,1.149c0.115,0.251,0.065,0.383-0.017,0.583C62.572,221.032,62.338,220.866,62.055,220.749z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M58.229,218.091c0.5,0.199,0.976-0.6,0.625-1.2 C57.805,216.941,57.891,217.667,58.229,218.091z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M61.604,220.631c-0.243-0.138-0.668-0.392-1.064-0.457 c-0.008,1.122-0.018,1.558,0.087,2.26c0.474-0.106,1.056-0.104,1.478-0.261C61.987,221.648,61.854,221.132,61.604,220.631z" })
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r1), d: "M64.771,208.346c-0.185,0.539-0.887,0.749-1.463,0.724 c0.012-0.9,0.728-1.621,1.056-2.193c-0.859-0.237-1.729-0.481-2.608-0.696c-0.853-0.206-1.855-0.646-2.606-0.607 c-1.113,0.059-2.367,1.201-3.215,1.912c-0.985,0.826-1.853,1.696-2.782,2.259c-0.91,1.284-1.251,3.882,0,5.041 c-0.733,0.009-1.008-0.441-1.217-0.955c-0.16,0.012-0.053,0.293-0.173,0.348c-0.675-0.296-0.392-1.014-0.608-1.739 c-1.218-0.078-2.495,0.428-3.999,0c-0.306,0.504-0.778,0.844-0.869,1.565c1.131,1.158,3.784,0.348,5.476,0.26 c0.77,0.885-0.778,1.401-1.738,1.39c0.559,0.239,1.368-0.02,1.826-0.172c-0.585,1.649-1.031,4.286,0.435,5.388 c1.083,0.816,3.555,1.079,5.271,1.311c0.918,0.125,1.815,0.285,2.637,0.254c0.096-0.887,0.145-1.468,0-2.347 c-0.944-0.718-2.554-0.966-2.637-2.389c-0.04-0.665,1.076-1.297,0.377-2.479c-0.65,0.163-1.077,0.547-1.912,0.523 c0.083,0.177,0.333,0.187,0.607,0.173c-1.031,0.602-2.561,0.222-2.87-0.783c1.301,0.134,2.262,0.277,3.304-0.086 c1.043-1.449,2.987-1.997,3.129-4.345c-0.839-0.32-1.839-0.48-2.085-1.392c0.719,0.237,1.512,1.153,2.956,0.955 c0.181-0.207-0.169-0.409-0.088-0.781c0.548,0.119,0.605,0.728,1.304,0.694c0.155-0.307,0.018-0.908,0.174-1.216 c0.381,0.47,0.332,0.646,0.434,1.303c0.222,1.422,1.828,2.933,3.564,3.043c-1.265-0.576-2.17-3.56-0.174-3.998 c-0.309-0.705-1.013-1.418-1.243-2.203c-0.637,0.501-1,1-1.277,1.594C63.997,208.695,64.409,208.445,64.771,208.346z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r1), d: "M68.296,207.32c-0.692-0.378-1.694-0.737-2.851-0.624 c0.835,1.076,1.064,2.643,2.135,3.483c0.414-0.106,0.802-0.241,1.042-0.521C68.646,208.67,68.529,207.867,68.296,207.32z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r1), d: "M66.537,210.006c-0.199,0.149-0.438,0.256-0.608,0.435 c-0.237-0.079,0.154-0.305-0.087-0.435c-0.172,0-0.11,0.238-0.348,0.173c-0.105,1.267,0.396,1.924,0.869,2.608 C68.26,212.616,67.75,210.525,66.537,210.006z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r1), d: "M59.409,213.532c-0.013,0.438,3.011,0.512,4.637,0.901 c3.324,0.35,4.074,0.099,4.874-0.575c0.05-0.675,0.186-2.688-0.472-2.723c-0.101,0.015-0.154-0.019-0.174-0.085 c0.149,1.394-0.822,2.977-2.433,2.781c-1.007-0.124-2.12-1.132-2.483-1.598c-0.362-0.466-0.486-0.65-0.712-1.175 c-0.362,0.349-1.112,0.175-1.887,0.062C61.296,211.595,60.996,213.633,59.409,213.532z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r1), d: "M60.321,211.684c-0.137,0.537-0.461,1.062-0.862,1.523 C60.346,213.358,61.001,211.634,60.321,211.684z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r1), d: "M50.98,211.918c-1.028-0.142-1.909,0.177-2.87,0.174 C49.069,212.279,49.931,212.018,50.98,211.918z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r1), d: "M63.997,214.907c-1.326-0.3-2.601-0.585-3.979-0.643 c0.639,1.12-0.429,1.758-1.217,2c0.024,0.107,0.178,0.042,0.591,0.199c0.833,0.316,2.396,1.119,3.279,1.337 c0.816,0.132,2.034,0.266,2.913,0.399c0.402,0.06,0.796-0.381,0.97-0.45c0.55-0.801,0.641-1.192,0.53-2.629 C66.158,215.07,65.133,215.094,63.997,214.907z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r1), d: "M58.714,214.352c-0.086,0.548-0.086,0.931,0,1.478 c0.319,0.029,0.483-0.097,0.695-0.175C60.246,214.933,59.67,214.133,58.714,214.352z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r1), d: "M46.112,215.395c1.474,0.297,3.165,0.054,4.954-0.348 c-1.425-0.108-3.652,0.216-4.868-0.348C46.218,214.979,46.045,215.067,46.112,215.395z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r1), d: "M50.805,216.264c-1.419-0.202-3.215-0.028-4.78-0.086 c0.104,1.635,0.905,2.808,1.273,4.179c1.412,0.15,2.725-0.049,3.875,0.099c-0.025-0.199-0.176-0.387-0.238-0.512 c-0.225-0.087-0.475-0.15-0.738-0.291C50.227,218.774,50.19,217.227,50.805,216.264z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r1), d: "M62.055,220.749c0.017,0.45,0.183,0.818,0.484,1.165 c0.432-0.249,0.781-0.547,0.898-1.231c1.167-0.4,1.629-1.087,1.699-2.117c-0.672-0.274-1.549-0.3-2.565-0.45 c-1.201-0.366-2.548-1.121-3.381-1.287c0.113,0.624,0.077,1.336-0.649,1.6c0.345,0.391,1.188,0.808,2.081,1.136 c0.714,0.262,1.729,0.691,2.25,1.149c0.115,0.251,0.065,0.383-0.017,0.583C62.572,221.032,62.338,220.866,62.055,220.749z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r1), d: "M58.229,218.091c0.5,0.199,0.976-0.6,0.625-1.2 C57.805,216.941,57.891,217.667,58.229,218.091z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.r1), d: "M61.604,220.631c-0.243-0.138-0.668-0.392-1.064-0.457 c-0.008,1.122-0.018,1.558,0.087,2.26c0.474-0.106,1.056-0.104,1.478-0.261C61.987,221.648,61.854,221.132,61.604,220.631z" })
         )
       ),
       g(
-        { id: "i_x5F_p1_1_" },
+        { id: "i_p1_1_" },
         g(
           { id: "open" },
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M91.699,210.301c-0.888-0.146-2.008,0.184-3.528-0.268 c0.272,0.477,0.786,0.714,1.059,1.192c-0.665-0.133-1.076-1.218-1.589-1.06c0.022,0.381,0.705,0.787,0.397,1.06 c-0.577-1.191-2.498-1.739-3.312-2.251c0.665,0.176,1.768,0.613,2.25,0.529c-0.092-0.879-1.317-0.624-1.721-1.191 c0.62,0.085,0.947,0.465,1.721,0.397c0.527-0.444,1.089-0.854,1.325-1.59c-0.586-0.121-1.094-0.319-1.325-0.794 c0.594,0.157,1.031,0.471,1.855,0.397c0.862-0.724,2.187-1.832,1.987-3.443c-0.06-0.482-0.396-0.677-0.953-0.778 c-0.408,0.225-0.571,0.45-0.901,0.91c-0.672,0.562-2.164,1.175-1.987,2.12c-0.965-0.076-1.455,0.966-2.25,1.588 c-2.086,1.63-4.6,3.062-3.84,6.49c1.703,2.235,5.404,0.486,6.488-1.325c-0.671,1.658-2.636,2.781-4.503,2.781 c-1.417,0-1.61-0.874-2.653-1.365l0.234,1.444c-0.455-0.015-0.48,0.398-0.902,0.416c0.053,0.253,0.222-0.006,0.485,0.07 c-0.194,0.445-0.866,0.253-1.248,0.277c-1.268,0.08-2.558,0.342-4.021,0.277c0.001,1.524,0.43,2.62,0.831,3.745 c1.21-0.038,2.235-0.261,3.397-0.348c-0.723-0.918-0.168-2.544,0.278-3.328c0.522,0.094,0.48-0.1,0.902-0.347 c-0.362,0.958-0.86,2.439-0.417,3.744c2.458,1.58,6.453,2.35,9.221,2.08c0.729-0.072,1.372-0.252,1.94-0.417 c0.211-0.575,0.427-1.145,0.694-1.664l1.733-2.704c0.045-0.253-0.159-0.125-0.251-0.243l0.113-0.52 c0.837-0.312,0.844-2.406,0.208-2.842c0.021-0.164,0.24-0.129,0.208-0.346c-0.546-0.766-0.351-2.494-1.265-2.761L91.699,210.301z " }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M103.23,212.091c-0.691-0.423-2.327-0.811-3.504-0.897 c0,0.739,0,1.479,0,2.218c1.207,0.207,2.828,0.741,3.744-0.069C103.57,212.789,103.367,212.321,103.23,212.091z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M93.14,210.431c0.432,1.67,0.956,3.25,3.466,2.842 c0.321-0.839,0.283-2.174-0.347-2.634C95.156,210.447,93.817,210.355,93.14,210.431z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M97.021,210.708c-0.094,1.001,0.521,1.777,0.139,2.634 c0.724,0.316,1.453,0.18,2.219,0.069c0.133-0.944,0.374-1.803-0.139-2.495C98.49,210.859,97.838,210.825,97.021,210.708z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M79.481,212.511c-1.199,0.175-2.797,0.411-4.091,0.486 c-0.47,0.314-0.544,1.025-0.484,1.871c1.361,0.332,3.165-0.162,4.645-0.208C79.136,214.124,79.634,213.531,79.481,212.511z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M94.317,213.897c0.255,0.587-0.279,1.269-0.069,1.802 c0.577,0.564,2.104,0.52,3.12,0.417c0.072-0.361,0.077-1.39,0.069-2.219C96.523,213.569,95.28,213.506,94.317,213.897z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M97.923,213.828c0.037,0.845-0.076,1.543-0.139,2.288 c1.058,0.02,1.865,0.456,2.843,0c0.368-0.614,0.226-1.801-0.208-2.219C99.873,213.783,98.775,213.843,97.923,213.828z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M101.113,214.175c0,0.67,0,1.34,0,2.01 c1.141-0.137,3.371,0.729,3.951-0.692C105.802,213.683,102.551,214.056,101.113,214.175z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M74.768,215.561c1.254,0.135,3.292-0.22,4.783-0.416 C78.049,215.034,76.183,215.312,74.768,215.561z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M79.481,215.561c-0.921,0.052-1.667,0.032-2.843,0.209 C77.456,215.846,78.747,215.798,79.481,215.561z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M93.625,218.334c0.685,0.264,1.689,0.21,2.495,0.208 c0.334-0.426,0.415-1.109,0.486-1.801C95.356,215.995,92.861,216.512,93.625,218.334z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M96.953,216.602c-0.124,0.616-0.202,1.277-0.278,1.94 c0.931-0.109,1.924-0.155,2.981-0.138c-0.014-0.755,0.174-1.411-0.277-1.802C98.424,216.431,98.086,216.675,96.953,216.602z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M99.934,216.74c0,0.669,0,1.34,0,2.01 c1.442-0.197,3.522,0.241,4.021-0.9C104.06,215.725,101.342,216.993,99.934,216.74z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M94.111,218.819c-0.47,0.109-0.718,0.438-1.042,0.694 c-1.015-0.248-1.223,0.899-1.524,1.594c0.92-0.064,1.725-0.107,2.357-0.208C93.858,220.087,94.383,219.443,94.111,218.819z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M94.525,218.959c-0.099,0.447-0.014,1.502-0.138,1.871 c0.688-0.069,1.562,0.243,2.011-0.208c0.151-0.58-0.012-0.917,0-1.456C95.946,218.666,95.217,219.004,94.525,218.959z" }),
-          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: props.foreground, d: "M99.694,220.146c0.189-0.127,0.343-0.812,0.101-1.186 c-1.021-0.312-1.913,0.052-3.05,0.138c-0.031,0.569,0.07,1.273-0.07,1.733c0.083,0.011,0.261,0,0.418-0.004 C97.093,220.826,99.504,220.271,99.694,220.146z" })
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p1), d: "M91.699,210.301c-0.888-0.146-2.008,0.184-3.528-0.268 c0.272,0.477,0.786,0.714,1.059,1.192c-0.665-0.133-1.076-1.218-1.589-1.06c0.022,0.381,0.705,0.787,0.397,1.06 c-0.577-1.191-2.498-1.739-3.312-2.251c0.665,0.176,1.768,0.613,2.25,0.529c-0.092-0.879-1.317-0.624-1.721-1.191 c0.62,0.085,0.947,0.465,1.721,0.397c0.527-0.444,1.089-0.854,1.325-1.59c-0.586-0.121-1.094-0.319-1.325-0.794 c0.594,0.157,1.031,0.471,1.855,0.397c0.862-0.724,2.187-1.832,1.987-3.443c-0.06-0.482-0.396-0.677-0.953-0.778 c-0.408,0.225-0.571,0.45-0.901,0.91c-0.672,0.562-2.164,1.175-1.987,2.12c-0.965-0.076-1.455,0.966-2.25,1.588 c-2.086,1.63-4.6,3.062-3.84,6.49c1.703,2.235,5.404,0.486,6.488-1.325c-0.671,1.658-2.636,2.781-4.503,2.781 c-1.417,0-1.61-0.874-2.653-1.365l0.234,1.444c-0.455-0.015-0.48,0.398-0.902,0.416c0.053,0.253,0.222-0.006,0.485,0.07 c-0.194,0.445-0.866,0.253-1.248,0.277c-1.268,0.08-2.558,0.342-4.021,0.277c0.001,1.524,0.43,2.62,0.831,3.745 c1.21-0.038,2.235-0.261,3.397-0.348c-0.723-0.918-0.168-2.544,0.278-3.328c0.522,0.094,0.48-0.1,0.902-0.347 c-0.362,0.958-0.86,2.439-0.417,3.744c2.458,1.58,6.453,2.35,9.221,2.08c0.729-0.072,1.372-0.252,1.94-0.417 c0.211-0.575,0.427-1.145,0.694-1.664l1.733-2.704c0.045-0.253-0.159-0.125-0.251-0.243l0.113-0.52 c0.837-0.312,0.844-2.406,0.208-2.842c0.021-0.164,0.24-0.129,0.208-0.346c-0.546-0.766-0.351-2.494-1.265-2.761L91.699,210.301z " }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p1), d: "M103.23,212.091c-0.691-0.423-2.327-0.811-3.504-0.897 c0,0.739,0,1.479,0,2.218c1.207,0.207,2.828,0.741,3.744-0.069C103.57,212.789,103.367,212.321,103.23,212.091z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p1), d: "M93.14,210.431c0.432,1.67,0.956,3.25,3.466,2.842 c0.321-0.839,0.283-2.174-0.347-2.634C95.156,210.447,93.817,210.355,93.14,210.431z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p1), d: "M97.021,210.708c-0.094,1.001,0.521,1.777,0.139,2.634 c0.724,0.316,1.453,0.18,2.219,0.069c0.133-0.944,0.374-1.803-0.139-2.495C98.49,210.859,97.838,210.825,97.021,210.708z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p1), d: "M79.481,212.511c-1.199,0.175-2.797,0.411-4.091,0.486 c-0.47,0.314-0.544,1.025-0.484,1.871c1.361,0.332,3.165-0.162,4.645-0.208C79.136,214.124,79.634,213.531,79.481,212.511z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p1), d: "M94.317,213.897c0.255,0.587-0.279,1.269-0.069,1.802 c0.577,0.564,2.104,0.52,3.12,0.417c0.072-0.361,0.077-1.39,0.069-2.219C96.523,213.569,95.28,213.506,94.317,213.897z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p1), d: "M97.923,213.828c0.037,0.845-0.076,1.543-0.139,2.288 c1.058,0.02,1.865,0.456,2.843,0c0.368-0.614,0.226-1.801-0.208-2.219C99.873,213.783,98.775,213.843,97.923,213.828z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p1), d: "M101.113,214.175c0,0.67,0,1.34,0,2.01 c1.141-0.137,3.371,0.729,3.951-0.692C105.802,213.683,102.551,214.056,101.113,214.175z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p1), d: "M74.768,215.561c1.254,0.135,3.292-0.22,4.783-0.416 C78.049,215.034,76.183,215.312,74.768,215.561z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p1), d: "M79.481,215.561c-0.921,0.052-1.667,0.032-2.843,0.209 C77.456,215.846,78.747,215.798,79.481,215.561z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p1), d: "M93.625,218.334c0.685,0.264,1.689,0.21,2.495,0.208 c0.334-0.426,0.415-1.109,0.486-1.801C95.356,215.995,92.861,216.512,93.625,218.334z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p1), d: "M96.953,216.602c-0.124,0.616-0.202,1.277-0.278,1.94 c0.931-0.109,1.924-0.155,2.981-0.138c-0.014-0.755,0.174-1.411-0.277-1.802C98.424,216.431,98.086,216.675,96.953,216.602z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p1), d: "M99.934,216.74c0,0.669,0,1.34,0,2.01 c1.442-0.197,3.522,0.241,4.021-0.9C104.06,215.725,101.342,216.993,99.934,216.74z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p1), d: "M94.111,218.819c-0.47,0.109-0.718,0.438-1.042,0.694 c-1.015-0.248-1.223,0.899-1.524,1.594c0.92-0.064,1.725-0.107,2.357-0.208C93.858,220.087,94.383,219.443,94.111,218.819z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p1), d: "M94.525,218.959c-0.099,0.447-0.014,1.502-0.138,1.871 c0.688-0.069,1.562,0.243,2.011-0.208c0.151-0.58-0.012-0.917,0-1.456C95.946,218.666,95.217,219.004,94.525,218.959z" }),
+          path({ "fill-rule": "evenodd", "clip-rule": "evenodd", fill: getColor(t.p1), d: "M99.694,220.146c0.189-0.127,0.343-0.812,0.101-1.186 c-1.021-0.312-1.913,0.052-3.05,0.138c-0.031,0.569,0.07,1.273-0.07,1.733c0.083,0.011,0.261,0,0.418-0.004 C97.093,220.826,99.504,220.271,99.694,220.146z" })
         )
       ),
       g(
-        { id: "i_x5F_s1" },
+        { id: "i_s1" },
         g(
           { id: "v" },
-          path({ fill: props.foreground, d: "M116.88,220.551c2.033,0.62,4.262,1.392,6.367,1.459c-0.058-0.889-0.202-0.757-0.202-1.752 c-0.99-0.494-2.07-0.915-1.832-2.606c-0.427-0.031-0.963,0.574-1.308,0.145c0.705-0.313,1.852-0.182,1.744-1.308 c-1.756,0.392-3.86,0.168-5.522-0.87c-0.282,0.626-1.206,2.812-0.542,4.293L116.88,220.551z" }),
-          path({ fill: props.foreground, d: "M133.854,210.969c0.243-0.329,0.549,0.506,0.726,0.726c0.988-0.126,1.968-0.26,2.616-0.726 c0.116-0.504-0.217-0.559-0.146-1.017c0.452,0.032,0.245,0.722,0.291,1.162c1.665-0.009,3.544,0.111,3.632-1.162 c0.149-2.19-4.773-0.909-7.12-0.872c-0.218,0.234,0.125,0.728,0,1.307c-0.215-0.269-0.277-0.69-0.291-1.163 c-1.362,0.042-2.386,0.422-3.487,0.728c0.362,0.898,0.925,1.594,1.018,2.76c-0.902-0.515-0.47-2.192-1.598-2.76 c-2.178,0.298-4.215,0.154-5.521,0.29c0.785,0.474,1.098,1.419,2.034,1.743c0-0.242,0-0.484,0-0.726 c0.169,0.274,0.419,0.391,0.435-0.146c0.395,0.356-0.159,0.995-0.145,1.453c0.732,0.188,0.851,0.99,1.597,1.163 c0.009-0.477,0.414-0.556,0.292-1.163c0.098,1.584,0.354,3.781,1.888,4.36c0.544-1.104,0.502-2.793,1.018-3.923 c0.707-0.748,2.151-0.756,3.052-1.308C133.893,211.606,134.155,211.006,133.854,210.969z" }),
-          path({ fill: props.foreground, d: "M129.205,219.105c-1.43,0.511-2.497-2.669-0.292-2.617c-0.278-0.543-0.543-1.103-0.726-1.742 c-0.304-0.062-0.385,0.099-0.582,0.146c-0.408-1.694-2.61-2.8-3.777-4.215c-0.569,0.012-0.906,0.257-1.307,0.437 c-0.269-0.254-0.017-0.505,0.436-0.437c-2.296-0.46-6.228-0.77-6.684,1.889c-0.608,3.555,3.441,4.681,6.249,2.76 c-0.361-0.704-1.238-0.892-1.598-1.597c0.396-0.244,0.886,0.659,1.307,0.872c0.364-0.236-0.257-0.7-0.291-1.017 c0.476-0.324,0.489,1.056,1.308,0.873c-0.136-0.124-0.311-0.928,0-1.018c0.36,1.14,0.906,2.097,1.889,2.616 C125.513,217.936,126.996,219.991,129.205,219.105z" }),
-          path({ fill: props.foreground, d: "M115.692,216.054c-0.063-0.217-0.186,0.056-0.435,0c-0.393-0.132,0.306-0.352,0.435-0.436 c0.025-0.316-0.515-0.067-0.727-0.147c0.187-0.454,0.301-0.074,0.727-0.29c0.044-0.383-0.303-0.375-0.582-0.436 c0.755-0.264,0.232-1.805,0.582-2.471c-1.349-0.12-1.332-0.027-2.906,0h-0.145c-1.32-0.332-1.765,1.417-1.744,2.906 c0.533,0,1.066,0,1.598,0c-0.267,0.459-1.735-0.282-1.598,0.581c1.223,0.255,1.968,0.33,3.632,0.292 c-0.924,0.65-2.24,0.095-3.486,0c-0.032,1.242-0.018,2.438,0.29,3.341c1.406,0.09,2.904,0.583,3.755,0.121 c-0.515-1.319,0.431-2.493-0.559-3.173c-0.024-0.237,0.951-0.293,0.728,0.145C115.592,216.533,115.417,216.07,115.692,216.054z"
+          path({ fill: getColor(t.s1), d: "M116.88,220.551c2.033,0.62,4.262,1.392,6.367,1.459c-0.058-0.889-0.202-0.757-0.202-1.752 c-0.99-0.494-2.07-0.915-1.832-2.606c-0.427-0.031-0.963,0.574-1.308,0.145c0.705-0.313,1.852-0.182,1.744-1.308 c-1.756,0.392-3.86,0.168-5.522-0.87c-0.282,0.626-1.206,2.812-0.542,4.293L116.88,220.551z" }),
+          path({ fill: getColor(t.s1), d: "M133.854,210.969c0.243-0.329,0.549,0.506,0.726,0.726c0.988-0.126,1.968-0.26,2.616-0.726 c0.116-0.504-0.217-0.559-0.146-1.017c0.452,0.032,0.245,0.722,0.291,1.162c1.665-0.009,3.544,0.111,3.632-1.162 c0.149-2.19-4.773-0.909-7.12-0.872c-0.218,0.234,0.125,0.728,0,1.307c-0.215-0.269-0.277-0.69-0.291-1.163 c-1.362,0.042-2.386,0.422-3.487,0.728c0.362,0.898,0.925,1.594,1.018,2.76c-0.902-0.515-0.47-2.192-1.598-2.76 c-2.178,0.298-4.215,0.154-5.521,0.29c0.785,0.474,1.098,1.419,2.034,1.743c0-0.242,0-0.484,0-0.726 c0.169,0.274,0.419,0.391,0.435-0.146c0.395,0.356-0.159,0.995-0.145,1.453c0.732,0.188,0.851,0.99,1.597,1.163 c0.009-0.477,0.414-0.556,0.292-1.163c0.098,1.584,0.354,3.781,1.888,4.36c0.544-1.104,0.502-2.793,1.018-3.923 c0.707-0.748,2.151-0.756,3.052-1.308C133.893,211.606,134.155,211.006,133.854,210.969z" }),
+          path({ fill: getColor(t.s1), d: "M129.205,219.105c-1.43,0.511-2.497-2.669-0.292-2.617c-0.278-0.543-0.543-1.103-0.726-1.742 c-0.304-0.062-0.385,0.099-0.582,0.146c-0.408-1.694-2.61-2.8-3.777-4.215c-0.569,0.012-0.906,0.257-1.307,0.437 c-0.269-0.254-0.017-0.505,0.436-0.437c-2.296-0.46-6.228-0.77-6.684,1.889c-0.608,3.555,3.441,4.681,6.249,2.76 c-0.361-0.704-1.238-0.892-1.598-1.597c0.396-0.244,0.886,0.659,1.307,0.872c0.364-0.236-0.257-0.7-0.291-1.017 c0.476-0.324,0.489,1.056,1.308,0.873c-0.136-0.124-0.311-0.928,0-1.018c0.36,1.14,0.906,2.097,1.889,2.616 C125.513,217.936,126.996,219.991,129.205,219.105z" }),
+          path({ fill: getColor(t.s1), d: "M115.692,216.054c-0.063-0.217-0.186,0.056-0.435,0c-0.393-0.132,0.306-0.352,0.435-0.436 c0.025-0.316-0.515-0.067-0.727-0.147c0.187-0.454,0.301-0.074,0.727-0.29c0.044-0.383-0.303-0.375-0.582-0.436 c0.755-0.264,0.232-1.805,0.582-2.471c-1.349-0.12-1.332-0.027-2.906,0h-0.145c-1.32-0.332-1.765,1.417-1.744,2.906 c0.533,0,1.066,0,1.598,0c-0.267,0.459-1.735-0.282-1.598,0.581c1.223,0.255,1.968,0.33,3.632,0.292 c-0.924,0.65-2.24,0.095-3.486,0c-0.032,1.242-0.018,2.438,0.29,3.341c1.406,0.09,2.904,0.583,3.755,0.121 c-0.515-1.319,0.431-2.493-0.559-3.173c-0.024-0.237,0.951-0.293,0.728,0.145C115.592,216.533,115.417,216.07,115.692,216.054z"
           }),
-          path({ fill: props.foreground, d: "M130.512,217.07c1.229,0.273,2.462,0.541,3.777,0.726c0-0.581,0.29-0.872,0.291-1.453 c0.337,0.516,0.201,0.939,0.145,1.599c0.635-0.428,2.545,0.866,2.761-0.437c0.403,1.293,3.525,1.526,4.649,0.727 c0.05-2.327-2.36-2.192-4.359-2.47c0,0.436,0,0.871,0,1.308c-0.314-0.267-0.305-0.856-0.29-1.452 c-0.749-0.059-2.047-1.011-2.615-0.292c-0.718-0.734-2.521-0.386-3.633-0.725C131.161,215.587,130.407,215.899,130.512,217.07z"
+          path({ fill: getColor(t.s1), d: "M130.512,217.07c1.229,0.273,2.462,0.541,3.777,0.726c0-0.581,0.29-0.872,0.291-1.453 c0.337,0.516,0.201,0.939,0.145,1.599c0.635-0.428,2.545,0.866,2.761-0.437c0.403,1.293,3.525,1.526,4.649,0.727 c0.05-2.327-2.36-2.192-4.359-2.47c0,0.436,0,0.871,0,1.308c-0.314-0.267-0.305-0.856-0.29-1.452 c-0.749-0.059-2.047-1.011-2.615-0.292c-0.718-0.734-2.521-0.386-3.633-0.725C131.161,215.587,130.407,215.899,130.512,217.07z"
           }),
-          path({ fill: props.foreground, d: "M123.538,215.618c-0.636-0.008-0.897,0.362-1.308,0.58c0.027,0.459,1.072,0.337,1.308,0.146 C123.538,216.102,123.538,215.859,123.538,215.618z" }),
-          path({ fill: props.foreground, d: "M124.409,216.054c-0.562,0.406-0.955,0.98-2.178,0.726c0.642,0.859,1.958,1.044,3.196,1.308 c-0.138-0.428-0.545-1.358-0.871-0.727C124.524,216.906,124.652,216.295,124.409,216.054z" }),
-          path({ fill: props.foreground, d: "M127.911,217.455c0.082,1.174,1.267,1.7,1.874,0.777c-0.144-0.486-0.583-0.675-0.727-1.162 C128.586,217.179,128.32,217.282,127.911,217.455z" }),
-          path({ fill: props.foreground, d: "M121.581,217.991c0.269,0.143,0.682,0.041,1.073-0.207C122.667,217.554,121.685,217.496,121.581,217.991z " }),
-          path({ fill: props.foreground, d: "M125.643,218.527c-0.762-0.041-1.711-0.289-2.541-0.73c-0.53,0.503-0.881,0.792-1.598,0.582 c0.45,1.179,2.494,1.766,3.487,2.905c-0.11,0.191-0.358,0.336-0.49,0.306c-0.198-0.259-0.692-0.774-1.108-1.032 c-0.035,0.616,0.133,1.03,0.29,1.453c0.971-0.02,1.635-0.277,2.538-0.535c-0.059-0.203-0.454-0.083-0.619-0.206 c0.165-0.165,0.536-0.206,0.948-0.165c0.351-0.331,0.599-0.639,0.784-1.052C127.094,219.943,126.2,219.291,125.643,218.527z" })
+          path({ fill: getColor(t.s1), d: "M123.538,215.618c-0.636-0.008-0.897,0.362-1.308,0.58c0.027,0.459,1.072,0.337,1.308,0.146 C123.538,216.102,123.538,215.859,123.538,215.618z" }),
+          path({ fill: getColor(t.s1), d: "M124.409,216.054c-0.562,0.406-0.955,0.98-2.178,0.726c0.642,0.859,1.958,1.044,3.196,1.308 c-0.138-0.428-0.545-1.358-0.871-0.727C124.524,216.906,124.652,216.295,124.409,216.054z" }),
+          path({ fill: getColor(t.s1), d: "M127.911,217.455c0.082,1.174,1.267,1.7,1.874,0.777c-0.144-0.486-0.583-0.675-0.727-1.162 C128.586,217.179,128.32,217.282,127.911,217.455z" }),
+          path({ fill: getColor(t.s1), d: "M121.581,217.991c0.269,0.143,0.682,0.041,1.073-0.207C122.667,217.554,121.685,217.496,121.581,217.991z " }),
+          path({ fill: getColor(t.s1), d: "M125.643,218.527c-0.762-0.041-1.711-0.289-2.541-0.73c-0.53,0.503-0.881,0.792-1.598,0.582 c0.45,1.179,2.494,1.766,3.487,2.905c-0.11,0.191-0.358,0.336-0.49,0.306c-0.198-0.259-0.692-0.774-1.108-1.032 c-0.035,0.616,0.133,1.03,0.29,1.453c0.971-0.02,1.635-0.277,2.538-0.535c-0.059-0.203-0.454-0.083-0.619-0.206 c0.165-0.165,0.536-0.206,0.948-0.165c0.351-0.331,0.599-0.639,0.784-1.052C127.094,219.943,126.2,219.291,125.643,218.527z" })
         )
       )
     )

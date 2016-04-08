@@ -2,6 +2,7 @@
 partial = require 'lodash/partial'
 
 controls = require './controls'
+rockpaperscissors = require './rock_paper_scissors'
 
 app = (props, dispatch) ->
   className = if props.playing then 'playing' else ''
@@ -14,10 +15,6 @@ app = (props, dispatch) ->
 
       controls(props.yours, dispatch)
 
-      div { className: 'responses' },
-        props.responses.map (response, key) =>
-          div { key: key },
-            span {}, key, ": "
-            span {}, JSON.stringify(response)
+      rockpaperscissors(props.yours, props.theirs)
 
 module.exports = app
