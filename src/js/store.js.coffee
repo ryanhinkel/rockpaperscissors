@@ -5,5 +5,3 @@ module.exports =
       yours: null
       theirs: null
       pair: null
-      responses: []
-
