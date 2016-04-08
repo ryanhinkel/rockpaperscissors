@@ -8,7 +8,7 @@ game = (props, dispatch) ->
   className = if props.playing then 'playing' else ''
   foregroundColor = colors.dynamic(props.pair)
 
-  div { className: 'app-root', style: { backgroundColor: colors.background } },
+  div { className: 'app-root game', style: { backgroundColor: colors.background } },
     div { className: 'me ' + className }, 'Connected ', props.me
 
     controls(props, dispatch)

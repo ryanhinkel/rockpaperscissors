@@ -6,11 +6,10 @@ store = require './store'
 cleanTimeout = 4000;
 
 websocket = (dispatch) ->
-  console.log "connecting"
   clean = () ->
     dispatch 'clean', null
 
-  c = new WebSocket 'ws://54.208.58.61:8100/ready'
+  c = new WebSocket 'ws://play.promptworks.com:8100/ready'
   c.onopen = () ->
     dispatch 'connected', c
 
