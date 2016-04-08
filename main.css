@@ -8,3 +8,12 @@ body {
 .responses {
   font-size: .5rem;
 }
+
+.playing {
+  background-color: gray;
+}
+
+.active {
+  background-color: black;
+  color: white;
+}
