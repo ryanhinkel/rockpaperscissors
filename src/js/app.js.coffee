@@ -8,13 +8,16 @@ websocket = (dispatch) ->
   c.onopen = () ->
     dispatch 'connected', c
     c.send 'hello'
-  c.onmessage= (event) ->
+  c.onmessage = (event) ->
     data = JSON.parse(event.data)
     if data.welcome
       dispatch 'welcomed', data.welcome
     else
       console.log(data)
       # store.data.responses.push(data)
+
+  c.onclose = (event) ->
+    console.log('closed!');
 
 update = (newState, dispatch) ->
   store.state = newState
