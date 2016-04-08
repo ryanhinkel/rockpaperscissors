@@ -26,7 +26,7 @@ trace = (yours, theirs) ->
 
   t
 
-module.exports = (yours, theirs, foregroundColor) ->
+module.exports = (yours, theirs, you, foregroundColor) ->
 
   highlight = foregroundColor
   foreground = colors.highlight

@@ -40,6 +40,7 @@ actions =
       shooting: false
       playing: true
       pair: payload.pair
+      you: payload.you
 
   clean: (state) ->
     assign {}, state,
@@ -47,6 +48,7 @@ actions =
       theirs: null
       shooting: false
       playing: false
+      you: null
 
 # Dispatch creator
 module.exports = (store, callback) ->

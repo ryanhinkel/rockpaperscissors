@@ -5,4 +5,5 @@ module.exports =
       playing: null
       yours: null
       theirs: null
+      you: null
       pair: null

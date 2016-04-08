@@ -13,8 +13,13 @@ game = (props, dispatch) ->
 
     controls(props, dispatch)
 
+    console.log(props.you)
+
+    if props.you is 'win'
+      div { className: 'you', style: { backgroundColor: foregroundColor } }, "YOU WIN"
+
     div { className: 'display' },
-      rockpaperscissors(props.yours, props.theirs, foregroundColor)
+      rockpaperscissors(props.yours, props.theirs, props.you, foregroundColor)
 
 
 module.exports = game

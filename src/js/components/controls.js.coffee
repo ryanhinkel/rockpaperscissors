@@ -5,7 +5,7 @@ controlTimeout = 1000
 
 playButton = (fn, key, label, played, color) ->
   color = if key is played then color else colors.highlight
-  a { onClick: fn(key) },
+  a { onClick: fn(key), onTouchStart: fn(key) },
     div {
       style:
         border: '2px solid ' + color
