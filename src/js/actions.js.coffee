@@ -19,10 +19,10 @@ actions =
   welcomed: (state, id) ->
     associate state, 'me', id
 
-  shoot: (state, payload) ->
-    state.connection.send payload
+  shoot: (state, selection) ->
+    state.connection.send selection
     assign {}, state,
-      yours: payload
+      yours: selection
       shooting: true
 
   clear: (state) ->
@@ -41,7 +41,7 @@ actions =
       playing: true
       pair: payload.pair
 
-  clean: (state, payload) ->
+  clean: (state) ->
     assign {}, state,
       yours: null
       theirs: null
