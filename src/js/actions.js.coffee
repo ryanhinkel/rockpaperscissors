@@ -29,6 +29,7 @@ actions =
     assign {}, state,
       theirs: payload.theirs
       playing: false
+      pair: payload.pair
 
 # Dispatch creator
 module.exports = (store, callback) ->

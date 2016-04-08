@@ -1,4 +1,5 @@
 { svg, g, rect, path } = require './svg_elements'
+colors = require './colors'
 
 trace = (yours, theirs) ->
   t = {}
@@ -25,11 +26,11 @@ trace = (yours, theirs) ->
 
   t
 
-module.exports = (yours, theirs) ->
+module.exports = (yours, theirs, foregroundColor) ->
 
-  highlight = '#ffffff'
-  foreground = '#e8c425'
-  background = '#111111'
+  highlight = foregroundColor
+  foreground = colors.highlight
+  background = colors.background
 
   t = trace(yours, theirs)
 
@@ -37,7 +38,7 @@ module.exports = (yours, theirs) ->
     if lookup then highlight else foreground
 
   svg(
-    { version: "1.1", id: "Layer_1", xmlns: "http://www.w3.org/2000/svg", x: "0px", y: "0px", width: "310px", height: "430.001px", viewBox: "0.5 0.5 310 430.001" },
+    { version: "1.1", id: "rock-paper-scissors", xmlns: "http://www.w3.org/2000/svg", x: "0px", y: "0px", viewBox: "0 0 310 430" },
     g(
       { id: "Layer_5" },
       rect({ x: "0.5", y: "0.5", fill: background, width: "310", height: "430" })

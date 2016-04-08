@@ -12,13 +12,13 @@ websocket = (dispatch) ->
     data = JSON.parse(event.data)
     if data.welcome
       dispatch 'welcomed', data.welcome
-    else
+    else if data.game
       dispatch 'check', data
       # store.data.responses.push(data)
 
   c.onclose = (event) ->
-    dispatch 'disconnected', null
-    websocket(dispatch)
+    # dispatch 'disconnected', null
+    # websocket(dispatch)
 
 update = (newState, dispatch) ->
   store.state = newState
