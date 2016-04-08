@@ -6,6 +6,7 @@ store = require './store'
 cleanTimeout = 4000;
 
 websocket = (dispatch) ->
+  console.log "connecting"
   clean = () ->
     dispatch 'clean', null
 
@@ -22,7 +23,7 @@ websocket = (dispatch) ->
       dispatch 'check', data
 
   c.onclose = (event) ->
-    # dispatch 'disconnected', null
+    dispatch 'disconnected', null
     # websocket(dispatch)
 
 update = (newState, dispatch) ->
@@ -30,7 +31,7 @@ update = (newState, dispatch) ->
   refresh store.state
 
 refresh = (props) ->
-  ui = layout(props, dispatch)
+  ui = layout(props, dispatch, websocket)
   element = document.getElementById 'app'
   render ui, element
 
@@ -39,7 +40,7 @@ dispatch = connect(store, update)
 
 # create socket connection and pass dispatch so
 # actions can be triggered by the connection
-websocket(dispatch)
+# websocket(dispatch)
 
 # initial refresh
 refresh(store.state, dispatch)

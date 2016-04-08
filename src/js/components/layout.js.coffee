@@ -3,9 +3,9 @@
 game = require './game'
 splash = require './splash'
 
-app = (props, dispatch) ->
+app = (props, dispatch, connect) ->
   if not props.me
-    splash props, dispatch
+    splash props, dispatch, connect
   else
     game props, dispatch
 

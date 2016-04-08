@@ -17,6 +17,19 @@ body {
   font-family: monospace;
 }
 
+/* Splash */
+
+.splash {
+  text-align: center;
+  font-size: 2em;
+  color: #fff;
+}
+
+.logo {
+  margin: 1em 10%;
+  width: 80%;
+}
+
 /* Status Bar */
 
 .me {
