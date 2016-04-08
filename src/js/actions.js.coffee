@@ -10,6 +10,7 @@ associate = (object, key, val) ->
 
 actions =
   connected: (state, connection) ->
+    connection.send 'hello'
     associate state, 'connection', connection
 
   welcomed: (state, id) ->
@@ -18,8 +19,13 @@ actions =
   shoot: (state, payload) ->
     state.connection.send payload
     assign {}, state,
-      played: payload
+      yours: payload
       playing: true
+
+  check: (state, payload) ->
+    assign {}, state,
+      theirs: payload.theirs
+      playing: false
 
 # Dispatch creator
 module.exports = (store, callback) ->

@@ -19,9 +19,9 @@ app = (props, dispatch) ->
       div { className: className }, 'Connected ', props.me,
 
       div { className: 'player-buttons' }
-        playButton(shoot, 'rock', "Rock", props.played)
-        playButton(shoot, 'paper', "Paper", props.played)
-        playButton(shoot, 'scissors', "Scissors", props.played)
+        playButton(shoot, 'rock', "Rock", props.yours)
+        playButton(shoot, 'paper', "Paper", props.yours)
+        playButton(shoot, 'scissors', "Scissors", props.yours)
 
       div { className: 'responses' },
         props.responses.map (response, key) =>

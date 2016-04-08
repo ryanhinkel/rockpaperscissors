@@ -2,6 +2,8 @@ module.exports =
     state:
       me: null
       playing: null
-      played: null
+      yours: null
+      theirs: null
+      pair: null
       responses: []
 

@@ -7,13 +7,13 @@ websocket = (dispatch) ->
   c = new WebSocket 'ws://54.208.58.61:8100/ready'
   c.onopen = () ->
     dispatch 'connected', c
-    c.send 'hello'
+
   c.onmessage = (event) ->
     data = JSON.parse(event.data)
     if data.welcome
       dispatch 'welcomed', data.welcome
     else
-      console.log(data)
+      dispatch 'check', data
       # store.data.responses.push(data)
 
   c.onclose = (event) ->
