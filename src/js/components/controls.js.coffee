@@ -1,6 +1,8 @@
 { div, a, span } = require './elements'
 colors = require './colors'
 
+controlTimeout = 1000
+
 playButton = (fn, key, label, played, color) ->
   color = if key is played then color else colors.highlight
   a { onClick: fn(key) },
@@ -14,10 +16,18 @@ playButton = (fn, key, label, played, color) ->
       span { className: 'label', style: { color: color} }, label
 
 
-controls = (yours, color, dispatch) ->
+controls = (props, dispatch) ->
+  { yours, pair, shooting } = props
+  color = colors.dynamic(pair)
+
+  clear = () ->
+    dispatch 'clear', null
+
   shoot = (play) ->
     () ->
-      dispatch 'shoot', play
+      if not shooting
+        setTimeout clear, controlTimeout
+        dispatch 'shoot', play
 
   div { className: 'player-controls' },
     playButton(shoot, 'rock', "Rock", yours, color)

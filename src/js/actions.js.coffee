@@ -23,11 +23,20 @@ actions =
     state.connection.send payload
     assign {}, state,
       yours: payload
+      shooting: true
       playing: true
+
+  clear: (state, payload) ->
+    assign {}, state,
+      yours: null
+      shooting: false
+      playing: false
 
   check: (state, payload) ->
     assign {}, state,
+      yours: payload.yours
       theirs: payload.theirs
+      shooting: false
       playing: false
       pair: payload.pair
 

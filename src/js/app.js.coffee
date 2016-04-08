@@ -14,7 +14,6 @@ websocket = (dispatch) ->
       dispatch 'welcomed', data.welcome
     else if data.game
       dispatch 'check', data
-      # store.data.responses.push(data)
 
   c.onclose = (event) ->
     # dispatch 'disconnected', null

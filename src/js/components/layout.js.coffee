@@ -15,7 +15,7 @@ app = (props, dispatch) ->
     div { className: 'app-root', style: { backgroundColor: colors.background } },
       div { className: 'me ' + className }, 'Connected ', props.me
 
-      controls(props.yours, foregroundColor, dispatch)
+      controls(props, dispatch)
 
       div { className: 'display' },
         rockpaperscissors(props.yours, props.theirs, foregroundColor)
