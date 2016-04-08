@@ -13,8 +13,6 @@ game = (props, dispatch) ->
 
     controls(props, dispatch)
 
-    console.log(props.you)
-
     if props.you is 'win'
       div { className: 'you', style: { backgroundColor: foregroundColor } }, "YOU WIN"
 

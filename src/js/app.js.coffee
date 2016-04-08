@@ -3,7 +3,7 @@ layout = require './components/layout'
 connect = require './actions'
 store = require './store'
 
-cleanTimeout = 4000;
+cleanTimeout = 1000;
 
 websocket = (dispatch) ->
   clean = () ->
@@ -23,7 +23,6 @@ websocket = (dispatch) ->
 
   c.onclose = (event) ->
     dispatch 'disconnected', null
-    # websocket(dispatch)
 
 update = (newState, dispatch) ->
   store.state = newState

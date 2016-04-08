@@ -44,8 +44,6 @@ actions =
 
   clean: (state) ->
     assign {}, state,
-      yours: null
-      theirs: null
       shooting: false
       playing: false
       you: null
