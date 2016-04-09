@@ -22,7 +22,7 @@ websocket = (dispatch) ->
       dispatch 'check', data
 
   c.onclose = (event) ->
-    dispatch 'disconnected', null
+    dispatch 'disconnected', event
 
 update = (newState, dispatch) ->
   store.state = newState

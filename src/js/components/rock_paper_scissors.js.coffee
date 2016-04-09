@@ -40,10 +40,6 @@ module.exports = (yours, theirs, you, foregroundColor) ->
   svg(
     { version: "1.1", id: "rock-paper-scissors", xmlns: "http://www.w3.org/2000/svg", x: "0px", y: "0px", viewBox: "0 0 310 430" },
     g(
-      { id: "Layer_5" },
-      rect({ x: "0.5", y: "0.5", fill: background, width: "310", height: "430" })
-    ),
-    g(
       { id: "input_paths" },
       path({ id: "p_r1_2_", fill: getColor(t.r1), stroke: background, "stroke-miterlimit": "10", d: "M64.501,236.5v34c0,3.309,2.691,6,6,6h98 c6.065,0,11,4.935,11,11v39h-8v-39c0-1.654-1.346-3-3-3h-98c-7.72,0-14-6.28-14-14v-34H64.501z" }),
       g(

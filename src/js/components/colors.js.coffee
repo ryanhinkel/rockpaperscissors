@@ -1,9 +1,17 @@
 cycleColors = [
+ '#ffc301',
  '#ff3348',
  '#00b58c',
  '#009eff',
- '#9852ff',
- '#ffc301'
+ '#9852ff'
+]
+
+cycleColorNames = [
+  'Yellow',
+  'Red',
+  'Green',
+  'Blue',
+  'Purple'
 ]
 
 module.exports =
@@ -15,3 +23,6 @@ module.exports =
       '#666'
     else
       cycleColors[key % cycleColors.length]
+  names: (key) ->
+    cycleColorNames[key % cycleColors.length]
+

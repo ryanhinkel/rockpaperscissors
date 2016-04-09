@@ -13,7 +13,17 @@ actions =
     connection.send 'hello'
     associate state, 'connection', connection
 
+  disconnect: (state, payload) ->
+    state.connection.close '1000', payload
+    assign {}, state,
+      me: null
+      pair: null
+      yours: null
+      theirs: null
+
   disconnected: (state, payload) ->
+    if payload.code is not '1000'
+      alert (payload.code)
     assign {}, state,
       me: null
       pair: null

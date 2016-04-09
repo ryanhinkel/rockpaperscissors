@@ -5,14 +5,13 @@ controlTimeout = 1000
 
 playButton = (fn, key, label, played, color, inProgress) ->
   color = if key is played and inProgress then color else colors.highlight
+  style =
+    border: '2px solid ' + color
+    padding: '.5em'
+    borderRadius: '.5em'
+
   a { onClick: fn(key), onTouchStart: fn(key) },
-    div {
-      style:
-        border: '2px solid ' + color
-        margin: '.5em'
-        padding: '.5em'
-        borderRadius: '.5em'
-      },
+    div { className: 'button', style },
       span { className: 'label', style: { color: color} }, label
 
 

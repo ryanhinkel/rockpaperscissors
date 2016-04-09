@@ -1,16 +1,16 @@
 { div, span } = require './elements'
 colors = require './colors'
 
+status = require './status'
 controls = require './controls'
 rockpaperscissors = require './rock_paper_scissors'
 
 game = (props, dispatch) ->
-  className = if props.playing then 'playing' else ''
   foregroundColor = colors.dynamic(props.pair)
 
   div { className: 'app-root game', style: { backgroundColor: colors.background } },
-    div { className: 'me ' + className }, 'Connected ', props.me
 
+    status(props, dispatch)
     controls(props, dispatch)
 
     if props.you is 'win'
