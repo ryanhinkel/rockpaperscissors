@@ -14,7 +14,11 @@ actions =
     associate state, 'connection', connection
 
   disconnected: (state, payload) ->
-    associate state, 'me', null
+    assign {}, state,
+      me: null
+      pair: null
+      yours: null
+      theirs: null
 
   welcomed: (state, id) ->
     associate state, 'me', id
@@ -23,6 +27,7 @@ actions =
     state.connection.send selection
     assign {}, state,
       yours: selection
+      theirs: null
       shooting: true
 
   clear: (state) ->
