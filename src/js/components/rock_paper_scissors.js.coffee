@@ -28,9 +28,9 @@ trace = (yours, theirs) ->
 
 module.exports = (yours, theirs, you, foregroundColor) ->
 
-  highlight = foregroundColor
+  highlight = if you is 'lose' then colors.background else foregroundColor
   foreground = colors.highlight
-  background = colors.background
+  background = if you is 'lose' then colors.highlight else colors.background
 
   t = trace(yours, theirs)
 

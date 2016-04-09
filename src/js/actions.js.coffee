@@ -57,6 +57,10 @@ actions =
       pair: payload.pair
       you: payload.you
 
+  blink: (state, payload) ->
+    assign {}, state,
+      you: payload
+
   clean: (state) ->
     assign {}, state,
       shooting: false

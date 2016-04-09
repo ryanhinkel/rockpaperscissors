@@ -9,6 +9,11 @@ websocket = (dispatch) ->
   clean = () ->
     dispatch 'clean', null
 
+  hit = (val) ->
+    () ->
+      you = if val is 1 then 'lose' else null
+      dispatch 'blink', you
+
   c = new WebSocket 'ws://play.promptworks.com:8100/ready'
   c.onopen = () ->
     dispatch 'connected', c
@@ -19,6 +24,12 @@ websocket = (dispatch) ->
       dispatch 'welcomed', data.welcome
     else if data.game
       setTimeout clean, cleanTimeout
+      if data.you is 'lose'
+        setTimeout hit(0), 100
+        setTimeout hit(1), 200
+        setTimeout hit(0), 300
+        setTimeout hit(1), 400
+        setTimeout hit(0), 500
       dispatch 'check', data
 
   c.onclose = (event) ->

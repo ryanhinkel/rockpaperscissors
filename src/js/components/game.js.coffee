@@ -17,7 +17,7 @@ game = (props, dispatch) ->
       div { className: 'you-win banner', style: { backgroundColor: foregroundColor } }, "YOU WIN!"
 
     if props.you is 'lose'
-      div { className: 'you-lose blink', style: { backgroundColor: '#fff' } }, ""
+      div { className: 'you-lose blink', style: { backgroundColor: colors.highlight } }, ""
 
     div { className: 'display' },
       rockpaperscissors(props.yours, props.theirs, props.you, foregroundColor)
