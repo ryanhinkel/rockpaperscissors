@@ -8,12 +8,17 @@ connect = (websocket, dispatch) ->
     websocket(dispatch)
 
 splash = (props, dispatch, websocket) ->
-  div { className: 'app-root', style: { backgroundColor: colors.background }  },
+  div {
+    className: 'app-root',
+    style: { backgroundColor: colors.background }
+    onClick: connect(websocket, dispatch)
+    onTouchStart: connect(websocket, dispatch)
+    },
     div { className: 'me connecting'}, 'Waiting for connection'
     div { className: 'splash' },
       img { src: logo, className: 'logo' }
       div {}, 'Rock Paper Scissors'
-      a { onClick: connect(websocket, dispatch) }, 'Play!'
+      a {}, 'Play!'
 
 
 module.exports = splash

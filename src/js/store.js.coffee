@@ -7,3 +7,6 @@ module.exports =
       theirs: null
       you: null
       pair: null
+      wins: 0
+      losses: 0
+      ties: 0
