@@ -58,7 +58,6 @@ module.exports = (store, callback) ->
   dispatch = (action, payload) ->
     console.log("-----------")
     console.log(action + " dispatched")
-    console.log(payload)
     action = actions[action]
     result = action.call null, store.state, payload
     callback result, dispatch

@@ -18,5 +18,4 @@ splash = (props, dispatch, websocket) ->
       div {}, 'Rock Paper Scissors'
       a {}, 'Play!'
 
-
 module.exports = splash

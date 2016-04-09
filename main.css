@@ -96,7 +96,7 @@ body {
   height: 100%;
 }
 
-.you {
+.banner {
   position:absolute;
   z-index: 100;
   top: 30%;
@@ -104,6 +104,33 @@ body {
   right: 0;
   font-size: 3em;
   text-align: center;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  19% { opacity: 1; }
+  20% { opacity: 0; }
+  39% { opacity: 0; }
+  40% { opacity: 1; }
+  59% { opacity: 1; }
+  60% { opacity: 0; }
+  79% { opacity: 0; }
+  80% { opacity: 1; }
+  99% { opacity: 1; }
+}
+
+.blink {
+  position:absolute;
+  z-index: 80;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  font-size: 3em;
+  text-align: center;
+  animation: blink .6s 1;
+
 }
 
 svg,
