@@ -2,6 +2,7 @@
 colors = require './colors'
 logo = require './../logo'
 status = require './status'
+graphic = require './splash_graphic'
 
 splash = (props, dispatch, websocket) ->
   connect = () ->
@@ -16,8 +17,6 @@ splash = (props, dispatch, websocket) ->
 
     status(props, dispatch)
     div { className: 'entry' },
-      img { src: logo, className: 'logo' }
-      div {}, 'Rock Paper Scissors'
-      a {}, 'Play!'
+      graphic()
 
 module.exports = splash

@@ -34,9 +34,9 @@ body {
   background-color: #111;
 }
 
-.logo {
-  margin: 1em 10%;
-  width: 80%;
+.entry svg {
+  margin: 3em 10%;
+  width: 60%;
 }
 
 
