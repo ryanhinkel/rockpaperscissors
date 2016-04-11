@@ -11,7 +11,9 @@ associate = (object, key, val) ->
 actions =
   connected: (state, connection) ->
     connection.send 'hello'
-    associate state, 'connection', connection
+    assign {}, state,
+     connection: connection
+     closeCode: null
 
   disconnect: (state, payload) ->
     state.connection.close '1000', payload
@@ -22,13 +24,12 @@ actions =
       theirs: null
 
   disconnected: (state, payload) ->
-    if payload.code is not '1000'
-      alert (payload.code)
     assign {}, state,
       me: null
       pair: null
       yours: null
       theirs: null
+      closeCode: payload.code
 
   welcomed: (state, id) ->
     associate state, 'me', id
@@ -70,7 +71,6 @@ actions =
 # Dispatch creator
 module.exports = (store, callback) ->
   dispatch = (action, payload) ->
-    console.log("-----------")
     console.log(action + " dispatched")
     action = actions[action]
     result = action.call null, store.state, payload
