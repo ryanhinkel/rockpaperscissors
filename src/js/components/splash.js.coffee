@@ -1,6 +1,5 @@
 { a, div, span, img } = require './elements'
 colors = require './colors'
-logo = require './../logo'
 status = require './status'
 graphic = require './splash_graphic'
 
