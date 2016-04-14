@@ -1,3 +1,5 @@
+var webpack = require("webpack");
+
 module.exports = {
     entry: "./src/js/app.js.coffee",
     output: {
@@ -7,10 +9,23 @@ module.exports = {
     resolve: {
         extensions: ["", ".webpack.js", ".web.js", ".js", ".js.coffee"]
     },
-    devtool: "#inline-source-map",
+    devtool: "source-map",
     module: {
         loaders: [
             { test: /\.coffee$/, loader: "coffee-loader" }
         ]
-    }
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+              'NODE_ENV': JSON.stringify('production')
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            },
+            sourceMap: true
+        })
+    ],
 };
