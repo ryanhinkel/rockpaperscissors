@@ -24,7 +24,8 @@ controls = (props, dispatch) ->
     dispatch 'clear', null
 
   shoot = (play) ->
-    () ->
+    (e) ->
+      e.preventDefault()
       if not inProgress
         setTimeout clear, controlTimeout
         dispatch 'shoot', play
