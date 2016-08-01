@@ -14,7 +14,7 @@ websocket = (dispatch) ->
       you = if val is 1 then 'lose' else null
       dispatch 'blink', you
 
-  c = new WebSocket 'wss://play.promptworks.com:8100/ready'
+  c = new WebSocket 'wss://play.promptworks.com:443/ready'
   c.onopen = () ->
     dispatch 'connected', c
 
